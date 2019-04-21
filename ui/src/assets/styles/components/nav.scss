@@ -1,0 +1,51 @@
+nav {
+    position: relative;
+    padding: 2em 0 0 0;
+    align-items: center;
+    z-index: 10;
+
+    .nav__brand {
+        flex: 1 1 0;
+        align-self: flex-start;
+
+        a {
+            display: inline-block;
+        }
+
+        img {
+            height: auto;
+            border-radius: 50%;
+            width: 130px;
+            overflow: visible;
+            transition: all 1.2s ease-in-out;
+        }
+    }
+
+    .nav__items {
+        flex: 4 1 0;
+        margin: 0;
+        padding: 0;
+        text-align: right;
+        vertical-align: top;
+
+    }
+
+    .nav__item {
+        display: inline-block;
+        padding: 0 40px;
+        letter-spacing: 0.5px;
+        font-size: 1.5rem;
+        transition: color 250ms ease;
+
+        @include max-width($size-tablet * 1.2) {
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        
+
+        &:hover {
+            color: $primary-color-light;
+        }
+    }
+}

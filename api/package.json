@@ -1,0 +1,27 @@
+{
+  "name": "shorelands-api",
+  "version": "1.0.0",
+  "description": "Shorelands Real Estate Site Api",
+  "main": "index.js",
+  "author": "Yannick Sealy",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "node-json-db": "^0.11.0",
+    "nodemon": "^1.18.10",
+    "pug": "^2.0.3"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-nodemon": "^2.4.2",
+    "gulp-sass": "^4.0.2",
+    "parcel-bundler": "^1.12.3"
+  }
+}

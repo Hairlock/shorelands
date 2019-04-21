@@ -1,0 +1,14 @@
+{
+    "properties": [
+        {
+            "title": "Park Avenue",
+            "slug": "park-avenue",
+            "category": "home"
+        },
+        {
+            "title": "Hingwan Drive",
+            "slug": "hingwan-drive",
+            "category": "land"
+        }
+    ]
+}

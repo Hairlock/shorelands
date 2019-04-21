@@ -1,0 +1,104 @@
+$grey-outline-color: #dadada;
+
+.experience-container {
+    background: #fbfbfb;
+    padding: 1em 0 0 0;
+
+    .header {
+        display: flex;
+        padding-top: 0.5em;
+        margin: 0 auto 0.5em auto;
+        flex: 1 1 100%;
+        letter-spacing: 1px;
+        font-size: $font-size-h2;
+        font-weight: 400;
+      }
+
+    .experience__items {
+        width: 100%;
+        margin: 0;
+        padding: 0 5px;
+    
+    }
+    
+    .experience__item {
+        cursor: pointer;
+        transform: translateY(0);
+        display: block;
+        padding: 18px 10% 20px;
+        border-bottom: 1px solid $grey-outline-color;
+        box-shadow: 0 0 0 rgba($black-color, 0.16);
+        background: linear-gradient($grey-color, $grey-color);
+        transition: all 200ms ease-in-out;
+        list-style: none;
+
+        &:hover,
+        &:active,
+        &:focus {
+            transform: translateY(-3px);
+            border-color: transparent;
+            box-shadow: 0 1px 6px rgba($black-color, 0.16);
+            background: linear-gradient(90deg, $primary-color-light, $secondary-color-light);
+            color: $white-color;
+
+            .experience-parent,
+            .experience-detail {
+                color: $white-color;
+            }
+        }
+    }
+
+    .experience__item-link {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-left: auto;
+        margin-right: auto;
+
+        .experience-parent {
+            flex: 3 1 100%;
+            margin-bottom: 0;
+            color: $primary-color;
+            letter-spacing: 0;
+            line-height: 1.2;
+            font-size: 1.8rem;
+            font-weight: 400;
+            transition: color 300ms ease;
+        }
+
+        .experience-detail {
+            color: $dark-grey-color;
+            font-size: 1rem;
+            font-weight: 400;
+            transition: color 300ms ease;
+        }
+
+        .experience-subtitle {
+            flex: 3 1 100%;
+          
+            @include min-width($size-tablet) {
+              flex: 1 1 50%;
+            }
+          }
+          
+        .experience-role {
+            flex: 1 1 100%;
+        
+            @include min-width($size-tablet) {
+                flex: 1 1 30%;
+            }
+        }
+        
+        .experience-date {
+            flex: 1 1 100%;
+            
+            @include min-width($size-tablet) {
+                flex: 1 1 20%;
+                align-self: flex-end;
+                text-align: right;
+            }
+        }
+    }
+}
+
+

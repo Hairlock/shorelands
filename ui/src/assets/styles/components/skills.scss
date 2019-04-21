@@ -1,0 +1,67 @@
+.skills {
+    display: flex;
+    flex-flow: row wrap;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 3em;
+
+    .header {
+        padding-top: 0.5em;
+        margin: 0 auto 0.5em auto;
+
+        margin-bottom: 0.5em;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        font-size: 1.6rem;
+        font-weight: 300;
+    }
+
+    h2 {
+        font-size: $font-size-h2;
+    }
+
+    h3 {
+        font-size: $font-size-h3;
+    }
+
+    .separated {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;      
+        
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            padding: 0.6em;
+        }
+
+        .pills {
+            list-style: none;
+            margin: 0 auto;
+            overflow: hidden;
+            padding: 0;
+
+            li {
+                float: left;
+                padding: 10px;
+                margin: 2px;
+                border-radius: 30%;
+                background: #eee;
+                font-size: 1.1rem;
+
+                &:hover {
+                    color: white;
+                    background: $primary-color-light;
+                    transition: all 200ms ease-in-out;
+                    &:hover {
+                        transform: translateY(-2px);
+                        opacity: 0.8;
+                    }
+                }
+            }
+        }
+
+    }
+      
+}

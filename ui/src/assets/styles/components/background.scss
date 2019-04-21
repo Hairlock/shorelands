@@ -1,0 +1,57 @@
+.background {
+    padding: 0 0 2em;
+    background: $white-color;
+
+    .title-wrapper {
+        padding-bottom: 2em;
+    }
+
+    
+    .background-summary {
+        margin: auto;
+        max-width: $size-tablet;
+        font-size: 2rem;
+        letter-spacing: 0.5px;
+    }
+
+    .summary {
+        line-height: 1.7;
+        font-size: 1.4rem;
+        margin-bottom: 0.5em;
+    }
+
+    .summary-list {
+        margin: 0;
+        padding: 15px 20px;
+        font-size: 1.4rem;
+    }
+
+    .summary-list__item {
+        margin-bottom: 0.5em;
+        line-height: 1.5;
+    }
+
+    .tldr {
+        &:hover {
+            color: $primary-color-light;
+        }
+    }
+
+    #tldr {
+        transition: all 1s ease;
+        
+        &:target {
+            -webkit-animation: highlight 1s linear;
+
+            @keyframes highlight {
+                from {
+                    background: $primary-color-light; 
+                }
+                to {
+                    background: none;
+                }
+            }
+        }
+    }
+
+}

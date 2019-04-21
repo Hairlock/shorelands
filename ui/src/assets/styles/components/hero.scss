@@ -1,0 +1,59 @@
+.hero {
+    padding-bottom: 4.7em;
+
+    .container {
+        position: relative;
+        z-index: 10;
+
+        & h1, h2 {
+            width: 100%;
+            max-width: $size-desktop * 0.8;
+        }
+    }
+}
+
+.hero__title {
+    position: relative;
+    margin-top: 1.1em;
+    margin-bottom: 1.5em;
+    letter-spacing: 1px;
+    line-height: 2.1;
+    font-size: $font-size-h1;
+    font-weight: 400;
+
+    a {
+        color: $primary-color-light;
+    }
+}
+
+.hero__interest {
+    margin-bottom: 2em;
+
+    a {
+        display: inline-block;
+        padding-right: 0.5em;
+
+        img {
+            height: 70px;
+            transition: all 200ms ease-in-out;
+
+            &:hover {
+                transform: translateY(-2px);
+                opacity: 0.8;
+            }
+        }
+    }
+
+    .interest__label {
+        margin-bottom: 1em;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        font-size: 1.6rem;
+        font-weight: 300;
+    }
+
+    @include min-width($size-tablet) {
+        flex: 1 1 0;
+        margin-bottom: 0;
+    }
+}
