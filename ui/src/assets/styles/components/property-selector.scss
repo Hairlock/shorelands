@@ -1,0 +1,48 @@
+.property-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3em;
+
+    > h2 {
+        font-size: $font-size-h1;
+        border-bottom: 1px solid black;
+    }
+
+    > .property-pills {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 3em;
+        width: 40%;
+        font-size: 2rem;
+
+        > .pill {
+            padding: 25px;
+            margin: 2px;
+            border-radius: 20%;
+            // background: #eee;
+            border: 1px solid grey;
+            font-size: 2.4rem;
+            color: $green-color;
+            cursor: pointer;
+
+            a {
+                padding: 0 15px 0 15px;
+            }
+
+            &:hover {
+                background: $green-color;
+                color: white;
+            }
+        }
+    }
+
+    > .sub-text {
+        margin-top: 5em;
+        font-size: 1rem;
+        color: #bdbab1;
+    }
+
+}

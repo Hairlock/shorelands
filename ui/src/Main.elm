@@ -52,9 +52,6 @@ changeRouteTo maybeRoute model =
     let
         session =
             toSession model
-
-        _ =
-            Debug.log "mayberoute" maybeRoute
     in
     case maybeRoute of
         Nothing ->
@@ -64,8 +61,8 @@ changeRouteTo maybeRoute model =
             Home.init session
                 |> updateWith Home HomeMsg model
 
-        Just Route.Properties ->
-            Properties.init session
+        Just (Route.Properties category) ->
+            Properties.init session category
                 |> updateWith Properties PropertiesMsg model
 
         Just (Route.Property slug) ->

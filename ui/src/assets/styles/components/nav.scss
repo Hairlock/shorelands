@@ -3,6 +3,7 @@ nav {
     padding: 2em 0 0 0;
     align-items: center;
     z-index: 10;
+    background-color: $blue-color;
 
     .nav__brand {
         flex: 1 1 0;
@@ -14,7 +15,6 @@ nav {
 
         img {
             height: auto;
-            border-radius: 50%;
             width: 130px;
             overflow: visible;
             transition: all 1.2s ease-in-out;
