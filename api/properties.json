@@ -3,12 +3,20 @@
         {
             "title": "Park Avenue",
             "slug": "park-avenue",
-            "category": "home"
+            "category": "home",
+            "tagline": "An Architectural wonder with high spec interiors and ocean view!",
+            "size": 350,
+            "bedrooms": 5,
+            "bathrooms": 4,
+            "pool": true
         },
         {
             "title": "Hingwan Drive",
             "slug": "hingwan-drive",
-            "category": "land"
+            "category": "land",
+            "tagline": "The Hingwan Drive property is a beachfront development.",
+            "size": 8000,
+            "drainage": true
         }
     ]
 }

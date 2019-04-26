@@ -1,8 +1,7 @@
 .properties-list {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 1em;
-    > h1 {
-        font-size: $font-size-h1;
-    }
+    flex-direction: column;
 }

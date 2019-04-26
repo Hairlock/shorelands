@@ -4,7 +4,6 @@ import Html exposing (Html, a, div, h1, h2, p, source, text, video)
 import Html.Attributes exposing (autoplay, class, href, loop, src, type_)
 import Html.Events exposing (..)
 import Http
-import Property exposing (Property, fetchAll, slug)
 import RemoteData exposing (RemoteData(..), WebData)
 import Session exposing (Session)
 import Task exposing (Task)
