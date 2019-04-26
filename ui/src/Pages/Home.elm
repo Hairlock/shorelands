@@ -37,7 +37,7 @@ view : Model -> { title : String, content : Html Msg }
 view model =
     { title = "Shorelands Real Estate"
     , content =
-        div []
+        div [ class "bg-white"]
             [ loopedVideo
             , propertySelector
             ]
