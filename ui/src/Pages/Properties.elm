@@ -7,6 +7,7 @@ import Http
 import Property exposing (Property(..), fetchAll, genericAttrs)
 import Property.Category as Category exposing (Category)
 import RemoteData exposing (RemoteData(..), WebData)
+import Route exposing (Route)
 import Session exposing (Session)
 import Task exposing (Task)
 
@@ -22,7 +23,7 @@ init : Session -> Category -> ( Model, Cmd Msg )
 init session searchCategory =
     let
         fetchProperties =
-            Property.fetchAll
+            Property.fetchAll searchCategory
                 |> Http.toTask
                 |> Task.attempt (RemoteData.fromResult >> PropertiesLoaded)
     in
@@ -59,9 +60,6 @@ view model =
                     [ class "properties-list container" ]
                     (List.map propertiesCard props)
 
-            -- ([ h1 [] [ text (category ++ " for sale!") ] ]
-            --     ++ List.map propertiesCard props
-            -- )
             Loading ->
                 div [] []
 
@@ -87,7 +85,7 @@ propertiesCard property =
             , div []
                 [ div [] [ amenities property ]
                 , div [ class "tag-line" ] [ text tagline ]
-                , a [ class "select-btn" ] [ text "See More" ]
+                , a [ class "select-btn", Route.href (Route.Property slug) ] [ text "See More" ]
                 ]
             ]
         ]

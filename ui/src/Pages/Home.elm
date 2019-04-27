@@ -4,7 +4,9 @@ import Html exposing (Html, a, div, h1, h2, p, source, text, video)
 import Html.Attributes exposing (autoplay, class, href, loop, src, type_)
 import Html.Events exposing (..)
 import Http
+import Property.Category exposing (Category(..))
 import RemoteData exposing (RemoteData(..), WebData)
+import Route exposing (Route)
 import Session exposing (Session)
 import Task exposing (Task)
 
@@ -37,7 +39,7 @@ view : Model -> { title : String, content : Html Msg }
 view model =
     { title = "Shorelands Real Estate"
     , content =
-        div [ class "bg-white"]
+        div [ class "bg-white" ]
             [ loopedVideo
             , propertySelector
             ]
@@ -65,8 +67,8 @@ propertySelector =
     div [ class "property-selector container" ]
         [ h2 [] [ text "What are you looking for?" ]
         , div [ class "property-pills" ]
-            [ div [ class "pill" ] [ a [ href "/properties/land" ] [ text "Land" ] ]
-            , div [ class "pill" ] [ a [ href "/properties/homes" ] [ text "Homes" ] ]
+            [ div [ class "pill" ] [ a [ Route.href (Route.Properties Land) ] [ text "Land" ] ]
+            , div [ class "pill" ] [ a [ Route.href (Route.Properties Homes) ] [ text "Homes" ] ]
             ]
         , div [ class "sub-text" ]
             [ p [] [ text "pick a category above to view a selection of our properties" ] ]

@@ -11,7 +11,8 @@ import Json.Decode as Decode exposing (Value)
 import Page exposing (Page)
 import Pages.Blank as Blank
 import Pages.Home as Home
-import Pages.Properties as Properties
+import Pages.Properties as PropertiesPage
+import Pages.Property as PropertyPage
 import Property
 import Route exposing (Route)
 import Session exposing (Session, freshSession)
@@ -37,9 +38,9 @@ port toJs : String -> Cmd msg
 type Model
     = NotFound Session
     | Redirect Session
-    | Property Session
     | Home Home.Model
-    | Properties Properties.Model
+    | Properties PropertiesPage.Model
+    | Property PropertyPage.Model
 
 
 init : Value -> Url -> Key -> ( Model, Cmd Msg )
@@ -62,11 +63,12 @@ changeRouteTo maybeRoute model =
                 |> updateWith Home HomeMsg model
 
         Just (Route.Properties category) ->
-            Properties.init session category
+            PropertiesPage.init session category
                 |> updateWith Properties PropertiesMsg model
 
         Just (Route.Property slug) ->
-            ( model, Cmd.none )
+            PropertyPage.init session slug
+                |> updateWith Property PropertyMsg model
 
 
 updateWith :
@@ -87,7 +89,14 @@ type Msg
     | ClickedLink Browser.UrlRequest
     | ChangedUrl Url
     | HomeMsg Home.Msg
-    | PropertiesMsg Properties.Msg
+    | PropertiesMsg PropertiesPage.Msg
+    | PropertyMsg PropertyPage.Msg
+
+
+
+-- ---------------------------
+-- UPDATE
+-- ---------------------------
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -110,8 +119,12 @@ update msg model =
                 |> updateWith Home HomeMsg model
 
         ( PropertiesMsg subMsg, Properties properties ) ->
-            Properties.update subMsg properties
+            PropertiesPage.update subMsg properties
                 |> updateWith Properties PropertiesMsg model
+
+        ( PropertyMsg subMsg, Property property ) ->
+            PropertyPage.update subMsg property
+                |> updateWith Property PropertyMsg model
 
         ( _, _ ) ->
             ( model, Cmd.none )
@@ -140,49 +153,13 @@ toSession page =
             Home.toSession home
 
         Properties properties ->
-            Properties.toSession properties
+            PropertiesPage.toSession properties
 
-        Property session ->
-            session
-
-
-
--- type alias OldModel =
---     { key : Key
---     , page : Route
---     }
--- initOld : Int -> Url -> Key -> ( Model, Cmd Msg )
--- initOld flags url key =
---     (
---         { key = key
---         , page = UrlParser.parse urlParser url
---             |> Maybe.withDefault NotFound
---         }
---         , Cmd.none
---     )
--- ---------------------------
--- URL Parsing and Routing
--- ---------------------------
--- urlParser : Parser (Route -> msg) msg
--- urlParser =
---     UrlParser.oneOf
---         [ UrlParser.map Home top
---         , UrlParser.map Property <| UrlParser.s "property" </> UrlParser.string
---         ]
--- ---------------------------
--- UPDATE
--- ---------------------------
-
-
-type OldMsg
-    = OnUrlRequest UrlRequest
-    | OnUrlChange Url
+        Property property ->
+            PropertyPage.toSession property
 
 
 
--- | Inc
--- | TestServer
--- | OnServerResponse (Result Http.Error String)
 -- ---------------------------
 -- VIEW
 -- ---------------------------
@@ -205,10 +182,10 @@ view model =
             viewPage Page.Home HomeMsg (Home.view home)
 
         Properties properties ->
-            viewPage Page.Properties PropertiesMsg (Properties.view properties)
+            viewPage Page.Properties PropertiesMsg (PropertiesPage.view properties)
 
-        Property _ ->
-            viewPage Page.Other (\_ -> Ignored) Blank.view
+        Property property ->
+            viewPage Page.Property PropertyMsg (PropertyPage.view property)
 
         Redirect _ ->
             viewPage Page.Other (\_ -> Ignored) Blank.view

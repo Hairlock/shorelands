@@ -1,0 +1,9 @@
+.property-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    flex-direction: column;
+    background-color: $white-color;
+}

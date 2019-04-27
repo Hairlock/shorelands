@@ -23,6 +23,7 @@ parser =
     oneOf
         [ Parser.map Home Parser.top
         , Parser.map Properties (s "properties" </> Category.urlParser)
+        , Parser.map Property (s "property" </> Parser.string)
         ]
 
 

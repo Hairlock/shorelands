@@ -4,12 +4,15 @@ import Browser exposing (Document)
 import Html exposing (Html, a, div, footer, h2, img, li, nav, text, ul)
 import Html.Attributes exposing (class, href, src)
 import Html.Events exposing (onClick)
+import Property.Category exposing (Category(..))
+import Route exposing (Route(..))
 
 
 type Page
     = Other
     | Home
     | Properties
+    | Property
 
 
 view : Page -> { title : String, content : Html msg } -> Document msg
@@ -23,14 +26,15 @@ viewHeader : Page -> Html msg
 viewHeader page =
     let
         navItems =
-            [ { link = "/properties/all", title = "Properties" }
-            , { link = "/faq", title = "FAQ" }
-            , { link = "/about", title = "About Us" }
+            [ { link = Route.href (Route.Properties Homes), title = "Homes" }
+            , { link = Route.href (Route.Properties Land), title = "Land" }
+            , { link = Route.href (Route.Properties All), title = "All Properties" }
+            , { link = Route.href Route.Home, title = "About Us" }
             ]
 
         navItemLi link title =
             li [ class "nav__item" ]
-                [ a [ href link ] [ text title ]
+                [ a [ link ] [ text title ]
                 ]
     in
     nav [ class "nav" ]

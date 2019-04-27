@@ -1,11 +1,11 @@
-module Property.Category exposing (Category, categoryDecoder, toString, urlParser)
+module Property.Category exposing (Category(..), categoryDecoder, toString, urlParser)
 
 import Json.Decode as Decode exposing (Decoder)
 import Url.Parser
 
 
 type Category
-    = Home
+    = Homes
     | Land
     | All
 
@@ -16,8 +16,8 @@ categoryDecoder =
         |> Decode.andThen
             (\category ->
                 case category of
-                    "home" ->
-                        Decode.succeed Home
+                    "homes" ->
+                        Decode.succeed Homes
 
                     "land" ->
                         Decode.succeed Land
@@ -41,21 +41,21 @@ urlParser =
 toString : Category -> String
 toString category =
     case category of
-        Home ->
-            "Homes"
+        Homes ->
+            "homes"
 
         Land ->
-            "Land"
+            "land"
 
         All ->
-            "All"
+            "all"
 
 
 toCategory : String -> Maybe Category
 toCategory str =
     case str of
         "homes" ->
-            Just Home
+            Just Homes
 
         "land" ->
             Just Land

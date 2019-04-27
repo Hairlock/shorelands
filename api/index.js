@@ -23,7 +23,26 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/properties', (req, res) => {
-    res.send(db.getData('/properties'));
+    let category = req.query.category;
+    let data = db.getData('/properties');
+    if (category == null || category === 'all')
+        res.send(data);
+    else
+        res.send(data.filter(p => p.category === category));
+});
+
+app.get('/api/property', (req, res) => {
+    let slug = req.query.slug;
+    let data = db.getData('/properties');
+    if (slug == null)
+        res.status(400).send('Provide slug parameter');
+    else {
+        let prop = data.find(p => p.slug === slug);
+        if (prop == null)
+            res.status(400).send('Invalid slug parameter')
+        else
+            res.send(prop);
+    }
 });
 
 app.get('/api/slugs', (req, res) => {

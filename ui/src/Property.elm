@@ -1,16 +1,21 @@
-module Property exposing (Property(..), fetchAll, genericAttrs)
+module Property exposing (Property(..), Slug, fetch, fetchAll, genericAttrs, GenericAttributes)
 
 import Api
 import Api.Endpoint as Endpoint
 import Http
 import Json.Decode as Decode exposing (Decoder)
 import Json.Decode.Pipeline exposing (required)
-import Property.Category exposing (Category, categoryDecoder)
+import Property.Category as Category exposing (Category, categoryDecoder)
+import Url.Builder
 
 
 type Property
     = Land LandAttributes
     | Home HomeAttributes
+
+
+type alias Slug =
+    String
 
 
 type alias GenericAttributes =
@@ -96,7 +101,21 @@ genericAttrs property =
             extract attrs
 
 
-fetchAll : Http.Request (List Property)
-fetchAll =
+fetchAll : Category -> Http.Request (List Property)
+fetchAll category =
+    let
+        params =
+            [ Url.Builder.string "category" (Category.toString category) ]
+    in
     Decode.list decoder
-        |> Api.get Endpoint.properties
+        |> Api.get (Endpoint.properties params)
+
+
+fetch : String -> Http.Request Property
+fetch slug =
+    let
+        params =
+            [ Url.Builder.string "slug" slug ]
+    in
+    decoder
+        |> Api.get (Endpoint.property params)

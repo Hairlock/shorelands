@@ -15,8 +15,12 @@
         flex-direction: row;
         justify-content: space-between;
         margin-top: 3em;
-        width: 40%;
+        width: 60%;
         font-size: 2rem;
+
+        @include min-width($size-desktop) {
+            width: 40%;
+        }
 
         > .pill {
             padding: 25px;

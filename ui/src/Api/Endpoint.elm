@@ -1,7 +1,9 @@
-module Api.Endpoint exposing (Endpoint, request, properties)
+module Api.Endpoint exposing (Endpoint, properties, property, request)
 
 import Http
+import Property.Category exposing (Category)
 import Url.Builder exposing (QueryParameter)
+
 
 request :
     { body : Http.Body
@@ -25,7 +27,7 @@ request config =
         }
 
 
-type Endpoint 
+type Endpoint
     = Endpoint String
 
 
@@ -42,6 +44,11 @@ url paths queryParams =
         |> Endpoint
 
 
-properties : Endpoint
-properties =
-    url [ "properties" ] []
+properties : List QueryParameter -> Endpoint
+properties params =
+    url [ "properties" ] params
+
+
+property : List QueryParameter -> Endpoint
+property params =
+    url [ "property" ] params
