@@ -1,4 +1,4 @@
-module Property exposing (Property(..), Slug, fetch, fetchAll, genericAttrs, GenericAttributes)
+module Property exposing (GenericAttributes, MapUrl, Property(..), Slug, fetch, fetchAll, genericAttrs)
 
 import Api
 import Api.Endpoint as Endpoint
@@ -18,12 +18,18 @@ type alias Slug =
     String
 
 
+type alias MapUrl =
+    String
+
+
 type alias GenericAttributes =
     { title : String
     , slug : String
     , category : Category
     , tagline : String
     , size : Int
+    , images : List String
+    , mapurl : String
     }
 
 
@@ -33,6 +39,8 @@ type alias HomeAttributes =
     , category : Category
     , tagline : String
     , size : Int
+    , images : List String
+    , mapurl : String
     , bedrooms : Int
     , bathrooms : Int
     , pool : Bool
@@ -45,6 +53,8 @@ type alias LandAttributes =
     , category : Category
     , tagline : String
     , size : Int
+    , images : List String
+    , mapurl : String
     , drainage : Bool
     }
 
@@ -65,6 +75,8 @@ decodeLand =
         |> required "category" categoryDecoder
         |> required "tagline" Decode.string
         |> required "size" Decode.int
+        |> required "images" (Decode.list Decode.string)
+        |> required "mapurl" Decode.string
         |> required "drainage" Decode.bool
         |> Decode.map Land
 
@@ -77,6 +89,8 @@ decodeHome =
         |> required "category" categoryDecoder
         |> required "tagline" Decode.string
         |> required "size" Decode.int
+        |> required "images" (Decode.list Decode.string)
+        |> required "mapurl" Decode.string
         |> required "bedrooms" Decode.int
         |> required "bathrooms" Decode.int
         |> required "pool" Decode.bool
@@ -90,8 +104,8 @@ decodeHome =
 genericAttrs : Property -> GenericAttributes
 genericAttrs property =
     let
-        extract { title, slug, category, tagline, size } =
-            GenericAttributes title slug category tagline size
+        extract { title, slug, category, tagline, size, images, mapurl } =
+            GenericAttributes title slug category tagline size images mapurl
     in
     case property of
         Land attrs ->

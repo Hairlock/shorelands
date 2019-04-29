@@ -16,6 +16,7 @@
             "elm/url": "1.0.0",
             "elm-explorations/markdown": "1.0.0",
             "krisajenkins/remotedata": "5.0.0",
+            "rl-king/elm-gallery": "2.0.0",
             "rtfeldman/elm-iso8601-date-strings": "1.1.0"
         },
         "indirect": {

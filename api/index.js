@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const jsonDB = require('node-json-db');
-const path = require('path');
+const fs = require('fs');
 
 const db = new jsonDB("properties", true, false);
 const port = process.env.PORT || 5000;
@@ -10,26 +10,29 @@ const port = process.env.PORT || 5000;
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'dist/views'))
+app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-    const props = db.getData('/properties');
-    var property = props[0];
-
-    res.render('homepage', {
-        property: property
-    });
-});
 
 app.get('/api/properties', (req, res) => {
     let category = req.query.category;
     let data = db.getData('/properties');
     if (category == null || category === 'all')
-        res.send(data);
+        res.send(data.map(setImagesOnProp));
     else
-        res.send(data.filter(p => p.category === category));
+        res.send(data
+            .filter(p => p.category === category)
+            .map(setImagesOnProp));
 });
+
+function setImagesOnProp(prop) {
+    try {
+        prop.images = fs.readdirSync(`./public/images/${prop.slug}`);
+    } catch (err) {
+        prop.images = [];
+    }
+
+    return prop;
+}
 
 app.get('/api/property', (req, res) => {
     let slug = req.query.slug;
@@ -40,10 +43,12 @@ app.get('/api/property', (req, res) => {
         let prop = data.find(p => p.slug === slug);
         if (prop == null)
             res.status(400).send('Invalid slug parameter')
-        else
-            res.send(prop);
+        else {
+            res.send(setImagesOnProp(prop));
+        }
     }
 });
+
 
 app.get('/api/slugs', (req, res) => {
     let slugs = db.getData('/properties').map(p => ({ slug: p.slug, category: p.category }));

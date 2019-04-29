@@ -29,7 +29,7 @@ viewHeader page =
             [ { link = Route.href (Route.Properties Homes), title = "Homes" }
             , { link = Route.href (Route.Properties Land), title = "Land" }
             , { link = Route.href (Route.Properties All), title = "All Properties" }
-            , { link = Route.href Route.Home, title = "About Us" }
+            , { link = Route.href Route.Home, title = "Contact Us" }
             ]
 
         navItemLi link title =

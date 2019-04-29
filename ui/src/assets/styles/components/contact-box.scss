@@ -1,0 +1,147 @@
+.contact-box {
+    width: 100%;
+    padding: 0 1em 1em 1em;
+
+    > .view-form {
+        padding: 0.4em;
+        border-radius: 35%;
+        border: 1px $grey-color solid;
+        align-self: flex-end;
+        font-size: 1.8rem;
+        color: $dark-blue-color;
+        cursor: pointer;
+
+        a {
+            padding: 0 15px 0 15px;
+        }
+
+        &:hover {
+            background: $green-color;
+            color: white;
+        }
+    }
+
+    > .contact-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        // align-self: flex-start;
+        // transition: 0.25s ease-in-out;
+
+        
+
+        .title {
+            // align-self: flex-start;
+            font-size: 1.8rem;
+        }
+        
+
+        div,
+        div.uk-icon{
+          position:relative;
+          max-width: 100%;
+          width: 100%;
+          display:flex;
+          margin: 20px;
+
+          @include min-width($size-desktop) {
+              max-width: 60%;
+          }
+          
+          svg{
+            position: absolute;
+            right: 30px; 
+            top: 0;
+            width: 20px;
+            height: 100%;
+            pointer-events: none;
+            color: #2B1620;
+          }
+        }
+
+        input{
+            background-color: rgba(189, 186, 177, 0.4);
+            // font-family: "Ubuntu Mono", monospace;
+            // font-weight: 700;
+            font-size: 1.4rem;
+            color: $dark-blue-color;
+            letter-spacing: 4px;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            padding: 30px 40px;
+            margin: 0;
+            border: none;
+            border-radius: 0;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            box-sizing: border-box;
+            position: relative;
+
+            &:focus::-webkit-input-placeholder {
+                color: transparent;
+            }
+
+            &:focus::-moz-placeholder {
+                color: transparent;
+            }
+
+            &:focus:-moz-placeholder {
+                color: transparent;
+            }            
+        }
+
+        textarea{
+        @extend input;
+        height: 200px;
+        }
+        
+        select{
+        @extend input;
+        cursor: pointer;
+        // text-transform: uppercase;
+        }
+
+        > h1 {
+            margin: 20px;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            line-height: 1.2em;
+        }
+          
+            
+          
+          
+        button {
+            @extend input;
+            background: $green-color;
+            background-size: 200%;
+            padding: 20px 40px;
+            color: white;
+            justify-content: center;
+            cursor: pointer;
+            
+            &:hover {
+                text-decoration: none;
+                animation: gradient-button 2.5s linear infinite;
+            }
+
+            &:disabled {
+                background-color: $grey-color;
+            }
+        }
+        
+        :focus {
+            outline: none;
+        }
+        
+        ::placeholder
+        { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: $dark-blue-color;
+        opacity: 0.5; /* Firefox */
+        // text-transform: uppercase;
+        }
+    }
+}
