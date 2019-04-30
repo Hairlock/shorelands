@@ -2,13 +2,7 @@ sudo: required
 services:
   - docker
 
-before_install:
-  - docker build -t yannicksealy/react-test -f ./client/Dockerfile.dev ./client
-
 script:
-  - docker run yannicksealy/react-test npm test -- --coverage
-
-after_success:
   - docker build -t yannicksealy/shorelands-ui ./ui
   - docker build -t yannicksealy/shorelands-nginx ./nginx
   - docker build -t yannicksealy/shorelands-api ./api
