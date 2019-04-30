@@ -2,6 +2,7 @@ module Property exposing (GenericAttributes, MapUrl, Property(..), Slug, fetch, 
 
 import Api
 import Api.Endpoint as Endpoint
+import Config exposing (Config)
 import Http
 import Json.Decode as Decode exposing (Decoder)
 import Json.Decode.Pipeline exposing (required)
@@ -115,21 +116,21 @@ genericAttrs property =
             extract attrs
 
 
-fetchAll : Category -> Http.Request (List Property)
-fetchAll category =
+fetchAll : Config -> Category -> Http.Request (List Property)
+fetchAll config category =
     let
         params =
             [ Url.Builder.string "category" (Category.toString category) ]
     in
     Decode.list decoder
-        |> Api.get (Endpoint.properties params)
+        |> Api.get (Endpoint.properties config params)
 
 
-fetch : String -> Http.Request Property
-fetch slug =
+fetch : Config -> String -> Http.Request Property
+fetch config slug =
     let
         params =
             [ Url.Builder.string "slug" slug ]
     in
     decoder
-        |> Api.get (Endpoint.property params)
+        |> Api.get (Endpoint.property config params)

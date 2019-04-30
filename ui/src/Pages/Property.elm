@@ -1,5 +1,6 @@
 module Pages.Property exposing (Model, Msg, init, toSession, update, view)
 
+import Config exposing (Config)
 import Gallery as Gallery
 import Gallery.Image as Image
 import Html exposing (Html, a, button, div, form, h1, hr, i, iframe, img, input, li, span, text, textarea, ul)
@@ -25,11 +26,11 @@ type alias Model =
     }
 
 
-init : Session -> Slug -> ( Model, Cmd Msg )
-init session slug =
+init : Config -> Session -> Slug -> ( Model, Cmd Msg )
+init config session slug =
     let
         fetchProperty =
-            Property.fetch slug
+            Property.fetch config slug
                 |> Http.toTask
                 |> Task.attempt (RemoteData.fromResult >> PropertyLoaded)
     in

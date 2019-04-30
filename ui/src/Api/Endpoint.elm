@@ -1,5 +1,6 @@
 module Api.Endpoint exposing (Endpoint, properties, property, request)
 
+import Config exposing (Config)
 import Http
 import Property.Category exposing (Category)
 import Url.Builder exposing (QueryParameter)
@@ -36,19 +37,19 @@ unwrap (Endpoint str) =
     str
 
 
-url : List String -> List QueryParameter -> Endpoint
-url paths queryParams =
-    Url.Builder.crossOrigin "http://localhost:5000"
+url : Config -> List String -> List QueryParameter -> Endpoint
+url config paths queryParams =
+    Url.Builder.crossOrigin config.apiUrl
         ("api" :: paths)
         queryParams
         |> Endpoint
 
 
-properties : List QueryParameter -> Endpoint
-properties params =
-    url [ "properties" ] params
+properties : Config -> List QueryParameter -> Endpoint
+properties config params =
+    url config [ "properties" ] params
 
 
-property : List QueryParameter -> Endpoint
-property params =
-    url [ "property" ] params
+property : Config -> List QueryParameter -> Endpoint
+property config params =
+    url config [ "property" ] params

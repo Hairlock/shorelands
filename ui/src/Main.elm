@@ -1,7 +1,8 @@
-port module Main exposing (main)
+module Main exposing (main)
 
 import Browser exposing (Document, UrlRequest(..))
 import Browser.Navigation as Nav exposing (Key)
+import Config exposing (Config)
 import Debug exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -22,20 +23,17 @@ import Url.Parser as UrlParser exposing ((</>), Parser, top)
 
 
 -- ---------------------------
--- PORTS
--- ---------------------------
-
-
-port toJs : String -> Cmd msg
-
-
-
--- ---------------------------
 -- MODEL
 -- ---------------------------
 
 
-type Model
+type alias Model =
+    { page : Page
+    , config : Config
+    }
+
+
+type Page
     = NotFound Session
     | Redirect Session
     | Home Home.Model
@@ -43,42 +41,45 @@ type Model
     | Property PropertyPage.Model
 
 
-init : Value -> Url -> Key -> ( Model, Cmd Msg )
+init : String -> Url -> Key -> ( Model, Cmd Msg )
 init flags url navKey =
-    changeRouteTo (Route.fromUrl url) (Redirect (freshSession navKey))
+    changeRouteTo (Route.fromUrl url) (Model (Redirect (freshSession navKey)) (Config flags))
 
 
 changeRouteTo : Maybe Route -> Model -> ( Model, Cmd Msg )
 changeRouteTo maybeRoute model =
     let
         session =
-            toSession model
+            toSession model.page
+
+        toModel page =
+            Model page model.config
     in
     case maybeRoute of
         Nothing ->
-            ( NotFound session, Cmd.none )
+            ( toModel <| NotFound session, Cmd.none )
 
         Just Route.Home ->
             Home.init session
                 |> updateWith Home HomeMsg model
 
         Just (Route.Properties category) ->
-            PropertiesPage.init session category
+            PropertiesPage.init model.config session category
                 |> updateWith Properties PropertiesMsg model
 
         Just (Route.Property slug) ->
-            PropertyPage.init session slug
+            PropertyPage.init model.config session slug
                 |> updateWith Property PropertyMsg model
 
 
 updateWith :
-    (subModel -> Model)
+    (subModel -> Page)
     -> (subMsg -> Msg)
     -> Model
     -> ( subModel, Cmd subMsg )
     -> ( Model, Cmd Msg )
 updateWith toModel toMsg model ( subModel, subCmd ) =
-    ( toModel subModel
+    ( Model (toModel subModel) model.config
     , Cmd.map toMsg subCmd
     )
 
@@ -101,7 +102,7 @@ type Msg
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    case ( msg, model ) of
+    case ( msg, model.page ) of
         ( Ignored, _ ) ->
             ( model, Cmd.none )
 
@@ -134,13 +135,13 @@ handleUrlRequest : Model -> UrlRequest -> Cmd msg
 handleUrlRequest model urlRequest =
     case urlRequest of
         Internal url ->
-            Nav.pushUrl (Session.navKey (toSession model)) (Url.toString url)
+            Nav.pushUrl (Session.navKey (toSession model.page)) (Url.toString url)
 
         External url ->
             Nav.load url
 
 
-toSession : Model -> Session
+toSession : Page -> Session
 toSession page =
     case page of
         NotFound session ->
@@ -177,7 +178,7 @@ view model =
             , body = List.map (Html.map toMsg) body
             }
     in
-    case model of
+    case model.page of
         Home home ->
             viewPage Page.Home HomeMsg (Home.view home)
 
@@ -205,7 +206,7 @@ view model =
 -- ---------------------------
 
 
-main : Program Value Model Msg
+main : Program String Model Msg
 main =
     Browser.application
         { init = init

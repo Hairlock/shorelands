@@ -10,6 +10,7 @@ import RemoteData exposing (RemoteData(..), WebData)
 import Route exposing (Route)
 import Session exposing (Session)
 import Task exposing (Task)
+import Config exposing (Config)
 
 
 type alias Model =
@@ -19,11 +20,11 @@ type alias Model =
     }
 
 
-init : Session -> Category -> ( Model, Cmd Msg )
-init session searchCategory =
+init : Config -> Session -> Category -> ( Model, Cmd Msg )
+init config session searchCategory =
     let
         fetchProperties =
-            Property.fetchAll searchCategory
+            Property.fetchAll config searchCategory
                 |> Http.toTask
                 |> Task.attempt (RemoteData.fromResult >> PropertiesLoaded)
     in

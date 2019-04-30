@@ -9,6 +9,10 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 // to extract the css as a separate file
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+const api_url = {
+    production: JSON.stringify(''),
+    development: JSON.stringify('http://localhost:5000')
+}
 var MODE =
     process.env.npm_lifecycle_event === "prod" ? "production" : "development";
 var withDebug = !process.env["npm_config_nodebug"];
@@ -29,6 +33,9 @@ var common = {
             template: "src/index.html",
             // inject details of output file at end of body
             inject: "body"
+        }),
+        new webpack.DefinePlugin({
+            'API_URL': api_url[MODE]
         })
     ],
     resolve: {

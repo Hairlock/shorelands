@@ -1,9 +1,11 @@
-module Session exposing (Session, navKey, freshSession)
+module Session exposing (Session, freshSession, navKey)
 
 import Browser.Navigation as Nav
 
-type Session 
+
+type Session
     = Guest Nav.Key
+
 
 navKey : Session -> Nav.Key
 navKey (Guest key) =
