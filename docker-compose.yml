@@ -3,23 +3,23 @@ services:
   nginx:
     restart: always
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ./nginx
     ports:
-      - '3005:80'
+      - '3006:80'
   api:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ./api
     volumes:
       - /app/node_modules
       - ./api:/app
-  # ui:
-  #   build:
-  #     dockerfile: Dockerfile.dev
-  #     context: ./ui
-  #   volumes:
-  #     - /app/node_modules
-  #     - ./ui:/app
-  #   ports:
-  #     - '1235:1235'
+  ui:
+    build:
+      dockerfile: Dockerfile
+      context: ./ui
+    volumes:
+      - /app/node_modules
+      - ./ui:/app
+    ports:
+      - '8080:8080'

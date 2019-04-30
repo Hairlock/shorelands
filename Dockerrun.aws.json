@@ -1,0 +1,35 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "ui",
+            "image": "yannicksealy/shorelands-ui",
+            "hostname": "ui",
+            "essential": false,
+            "memory": 128
+        },
+        {
+            "name": "api",
+            "image": "yannicksealy/shorelands-api",
+            "hostname": "api",
+            "essential": false,
+            "memory": 128
+        },
+        {
+            "name": "nginx",
+            "image": "yannicksealy/shorelands-nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": [
+                "ui",
+                "api"
+            ],
+            "memory": 128
+        }
+    ]
+}

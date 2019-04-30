@@ -1,0 +1,34 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t yannicksealy/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run yannicksealy/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t yannicksealy/shorelands-ui ./ui
+  - docker build -t yannicksealy/shorelands-nginx ./nginx
+  - docker build -t yannicksealy/shorelands-api ./api
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push yannicksealy/shorelands-ui
+  - docker push yannicksealy/shorelands-nginx
+  - docker push yannicksealy/shorelands-api
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: shorelands
+  env: Shorelands-env
+  bucket_name: elasticbeanstalk-us-east-2-521418590951
+  bucket_path: shorelands
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
+
+
+
