@@ -1,5 +1,6 @@
 module Pages.Properties exposing (Model, Msg, init, toSession, update, view)
 
+import Config exposing (Config)
 import Html exposing (Html, a, button, div, h1, hr, i, img, li, span, text, ul)
 import Html.Attributes exposing (class, src)
 import Html.Events exposing (..)
@@ -10,13 +11,13 @@ import RemoteData exposing (RemoteData(..), WebData)
 import Route exposing (Route)
 import Session exposing (Session)
 import Task exposing (Task)
-import Config exposing (Config)
 
 
 type alias Model =
     { properties : WebData (List Property)
     , searchCategory : Category
     , session : Session
+    , config : Config
     }
 
 
@@ -31,6 +32,7 @@ init config session searchCategory =
     ( { properties = Loading
       , searchCategory = searchCategory
       , session = session
+      , config = config
       }
     , fetchProperties
     )
@@ -59,7 +61,7 @@ view model =
                 in
                 div
                     [ class "properties-list container" ]
-                    (List.map propertiesCard props)
+                    (List.map (propertiesCard model.config) props)
 
             Loading ->
                 div [] []
@@ -69,8 +71,8 @@ view model =
     }
 
 
-propertiesCard : Property -> Html Msg
-propertiesCard property =
+propertiesCard : Config -> Property -> Html Msg
+propertiesCard config property =
     let
         { title, slug, category, size, tagline } =
             genericAttrs property
@@ -82,7 +84,7 @@ propertiesCard property =
         [ h1 [ class "header" ] [ text title ]
         , hr [ class "divider" ] []
         , div [ class "card-content" ]
-            [ div [] [ img [ class "property-picture", src <| "/images/" ++ slug ++ ".jpg" ] [] ]
+            [ div [] [ img [ class "property-picture", src <| config.apiUrl ++ "/images/" ++ slug ++ "/primary.jpg" ] [] ]
             , div []
                 [ div [] [ amenities property ]
                 , div [ class "tag-line" ] [ text tagline ]
