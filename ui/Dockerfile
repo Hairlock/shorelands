@@ -9,5 +9,5 @@ RUN     yarn
 COPY    . .
 RUN     yarn prod
 
-RUN     yarn global add http-server     
-CMD     ["http-server", "dist"]
+RUN     yarn global add express
+CMD     ["node", "server.js"]
