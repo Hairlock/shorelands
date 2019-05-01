@@ -15,7 +15,7 @@ deploy:
   provider: elasticbeanstalk
   region: us-east-2
   app: shorelands
-  env: Shorelands-env
+  env: Shorelands-stack
   bucket_name: elasticbeanstalk-us-east-2-521418590951
   bucket_path: shorelands
   on:
