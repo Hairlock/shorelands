@@ -23,6 +23,7 @@ type alias Model =
     , showContactForm : Bool
     , email : String
     , message : String
+    , config : Config
     }
 
 
@@ -41,6 +42,7 @@ init config session slug =
       , showContactForm = False
       , email = ""
       , message = ""
+      , config = config
       }
     , fetchProperty
     )
@@ -144,7 +146,7 @@ propertyCard model imageGallery generic property =
         , case imageGallery of
             Just gallery ->
                 Html.map ImageGalleryMsg <|
-                    Gallery.view imageConfig gallery [ Gallery.Arrows ] (imageSlides slug images)
+                    Gallery.view imageConfig gallery [ Gallery.Arrows ] (imageSlides model.config slug images)
 
             Nothing ->
                 div [] []
@@ -224,10 +226,6 @@ staticMap mapurl =
         []
 
 
-
--- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1960.3761740084913!2d-61.556341024091!3d10.676320998088046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDQwJzM0LjgiTiA2McKwMzMnMTguOSJX!5e0!3m2!1sen!2suk!4v1556547661796!5m2!1sen!2suk" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-
-
 amenitiesList : Property -> Html Msg
 amenitiesList property =
     div [ class "amenities" ]
@@ -272,11 +270,11 @@ amenitiesList property =
         ]
 
 
-imageSlides : Slug -> List String -> List ( String, Html msg )
-imageSlides slug =
+imageSlides : Config -> Slug -> List String -> List ( String, Html msg )
+imageSlides config slug =
     let
         url img =
-            "http://localhost:5000/images/" ++ slug ++ "/" ++ img
+            config.apiUrl ++ "/images/" ++ slug ++ "/" ++ img
     in
     List.map (\x -> ( x, Image.slide (url x) Image.Cover ))
 
