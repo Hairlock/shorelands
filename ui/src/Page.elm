@@ -42,7 +42,7 @@ viewHeader page =
             [ div
                 [ class "nav__brand" ]
                 [ a [ href "/" ]
-                    [ img [ src "/images/shorelands_logo.svg" ] [] ]
+                    [ img [ src "/logo/shorelands_logo.svg" ] [] ]
                 ]
             , ul [ class "nav__items" ]
                 (List.map (\{ link, title } -> navItemLi link title) navItems)
