@@ -1,0 +1,12 @@
+.amenities-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: 0;
+
+    > .amenities-item {
+        font-size: 1.3rem;
+        color: $grey-color;
+        margin-left: 2.5em;
+    }
+}

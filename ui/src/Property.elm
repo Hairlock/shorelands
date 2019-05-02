@@ -57,6 +57,7 @@ type alias LandAttributes =
     , images : List String
     , mapurl : String
     , drainage : Bool
+    , planning : Bool
     }
 
 
@@ -79,6 +80,7 @@ decodeLand =
         |> required "images" (Decode.list Decode.string)
         |> required "mapurl" Decode.string
         |> required "drainage" Decode.bool
+        |> required "planning" Decode.bool
         |> Decode.map Land
 
 

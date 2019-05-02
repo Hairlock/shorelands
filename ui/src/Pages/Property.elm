@@ -239,34 +239,33 @@ amenitiesList property =
                         ]
                     ]
 
-            Home { size, pool, bedrooms } ->
+            Home { size, pool, bedrooms, bathrooms } ->
                 ul [ class "fa-ul amenities-list" ]
-                    [ li [ class "amenities-item" ]
+                    ([ li [ class "amenities-item" ]
                         [ span [ class "fa-li" ]
                             [ i [ class "fas fa-ruler-combined" ] [] ]
                         , text <| String.fromInt size ++ " sq ft."
                         ]
-                    , li [ class "amenities-item" ]
+                     , li [ class "amenities-item" ]
                         [ span [ class "fa-li" ]
                             [ i [ class "fas fa-bed" ] [] ]
                         , text <| String.fromInt bedrooms ++ " bedrooms"
                         ]
-                    , li [ class "amenities-item" ]
+                     , li [ class "amenities-item" ]
                         [ span [ class "fa-li" ]
-                            [ i [ class "fas fa-bed" ] [] ]
-                        , text <| String.fromInt bedrooms ++ " bedrooms"
+                            [ i [ class "fas fa-bath" ] [] ]
+                        , text <| String.fromInt bathrooms ++ " bathrooms"
                         ]
-                    , li [ class "amenities-item" ]
-                        [ span [ class "fa-li" ]
-                            [ i [ class "fas fa-bed" ] [] ]
-                        , text <| String.fromInt bedrooms ++ " bedrooms"
-                        ]
-                    , li [ class "amenities-item" ]
-                        [ span [ class "fa-li" ]
-                            [ i [ class "fas fa-bed" ] [] ]
-                        , text <| String.fromInt bedrooms ++ " bedrooms"
-                        ]
-                    ]
+                     ]
+                        |> addIf pool
+                            (li [ class "amenities-item" ]
+                                [ span [ class "fa-li" ]
+                                    [ i [ class "fas fa-swimming-pool" ] []
+                                    ]
+                                , text "swimming pool"
+                                ]
+                            )
+                    )
         ]
 
 
@@ -285,8 +284,17 @@ imageConfig =
         { id = "image-gallery"
         , transition = 500
         , width = Gallery.vw 60
-        , height = Gallery.px 400
+        , height = Gallery.vw 30
         }
+
+
+addIf : Bool -> Html msg -> List (Html msg) -> List (Html msg)
+addIf pred item list =
+    if pred then
+        list ++ [ item ]
+
+    else
+        list
 
 
 toSession : Model -> Session

@@ -18,7 +18,8 @@
             "tagline": "The Hingwan Drive property is a beachfront development.",
             "size": 8000,
             "mapurl": "",
-            "drainage": true
+            "drainage": true,
+            "planning": true
         }
     ]
 }
