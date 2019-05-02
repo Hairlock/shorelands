@@ -37,3 +37,19 @@
         color: $white-color;
     }
 }
+
+@mixin form-message($color) {
+    border: 2px solid $color;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    
+    > div {
+        padding: 0.8em;
+        
+        &:first-child {
+            color: white;
+            background-color: $color;
+        }
+    }
+}

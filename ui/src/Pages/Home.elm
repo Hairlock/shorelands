@@ -1,6 +1,6 @@
 module Pages.Home exposing (Model, Msg, init, toSession, update, view)
 
-import Html exposing (Html, a, div, h1, h2, p, source, text, video)
+import Html exposing (Html, a, div, h1, h2, hr, p, source, text, video)
 import Html.Attributes exposing (autoplay, class, href, loop, src, type_)
 import Html.Events exposing (..)
 import Http
@@ -41,7 +41,6 @@ view model =
     , content =
         div [ class "bg-white" ]
             [ loopedVideo
-            , propertySelector
             ]
     }
 
@@ -58,6 +57,7 @@ loopedVideo =
         , div [ class "overlay" ]
             [ h1 [] [ text "Shorelands Real Estate" ]
             , h2 [] [ text "Quality beachfront properties in Trinidad and Tobago" ]
+            , propertySelector
             ]
         ]
 

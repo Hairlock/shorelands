@@ -1,7 +1,7 @@
 module Page exposing (Page(..), view)
 
 import Browser exposing (Document)
-import Html exposing (Html, a, div, footer, h2, img, li, nav, text, ul)
+import Html exposing (Html, a, div, footer, h2, i, img, li, nav, option, select, text, ul)
 import Html.Attributes exposing (class, href, src)
 import Html.Events exposing (onClick)
 import Property.Category exposing (Category(..))
@@ -46,6 +46,12 @@ viewHeader page =
                 ]
             , ul [ class "nav__items" ]
                 (List.map (\{ link, title } -> navItemLi link title) navItems)
+            , div []
+                [ select []
+                    [ option [] [ text "USD" ]
+                    , option [] [ text "TTD" ]
+                    ]
+                ]
             ]
         ]
 

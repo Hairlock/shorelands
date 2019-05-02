@@ -1,4 +1,6 @@
 const express = require('express');
+const { check, validationResult }
+    = require('express-validator/check');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const jsonDB = require('node-json-db');
@@ -49,11 +51,31 @@ app.get('/api/property', (req, res) => {
     }
 });
 
-
 app.get('/api/slugs', (req, res) => {
     let slugs = db.getData('/properties').map(p => ({ slug: p.slug, category: p.category }));
     res.send(slugs);
-})
+});
+
+app.post('/api/enquiry', [
+    check('email').isEmail().normalizeEmail(),
+    check('title').trim().escape(),
+    check('message').trim().escape()
+], (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty())
+        return res.send(422).json({ errors: errors.array() })
+
+    let title = req.body.title,
+        email = req.body.email,
+        message = req.body.message;
+
+    console.log(title);
+    console.log(email);
+    console.log(message);
+
+    res.send({ success: true });
+
+});
 
 app.listen(port, err => {
     if (err)

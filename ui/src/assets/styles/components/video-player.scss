@@ -1,5 +1,5 @@
 .video-player {
-    $header-size: 2.5rem;
+    $header-size: 5rem;
     $sub-header-size: 2.3rem;
     position: relative;
     padding-bottom: 2em;
@@ -28,10 +28,16 @@
         
         > h1 {
             font-size: $header-size;
+            letter-spacing: 2.5px;
+            margin-top: 0;
+
+            @include min-width(768px) {
+                margin-top: -2em;
+            }
         }
 
         > h2 {
             font-size: $sub-header-size;
-        }
+        }        
     }
 }

@@ -1,6 +1,7 @@
 module Pages.Property exposing (Model, Msg, init, toSession, update, view)
 
 import Config exposing (Config)
+import Enquiry as Enquiry exposing (EnquiryResponse)
 import Gallery as Gallery
 import Gallery.Image as Image
 import Html exposing (Html, a, button, div, form, h1, hr, i, iframe, img, input, li, span, text, textarea, ul)
@@ -24,6 +25,7 @@ type alias Model =
     , email : String
     , message : String
     , config : Config
+    , enquiryStatus : WebData EnquiryResponse
     }
 
 
@@ -43,6 +45,7 @@ init config session slug =
       , email = ""
       , message = ""
       , config = config
+      , enquiryStatus = NotAsked
       }
     , fetchProperty
     )
@@ -54,7 +57,8 @@ type Msg
     | ToggleContactForm
     | EmailInput String
     | MessageInput String
-    | ContactSubmit
+    | SubmitEnquiry String
+    | EnquiryResult (WebData EnquiryResponse)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -95,6 +99,9 @@ update msg model =
             , Cmd.none
             )
 
+        EnquiryResult data ->
+            ( { model | enquiryStatus = data }, Cmd.none )
+
         ToggleContactForm ->
             ( { model | showContactForm = not model.showContactForm }, Cmd.none )
 
@@ -104,8 +111,16 @@ update msg model =
         MessageInput message ->
             ( { model | message = message }, Cmd.none )
 
-        ContactSubmit ->
-            ( model, Cmd.none )
+        SubmitEnquiry title ->
+            ( model
+            , Enquiry.sendEnquiry model.config
+                { email = model.email
+                , message = model.message
+                , title = title
+                }
+                |> Http.toTask
+                |> Task.attempt (RemoteData.fromResult >> EnquiryResult)
+            )
 
 
 view : Model -> { title : String, content : Html Msg }
@@ -172,9 +187,17 @@ propertyCard model imageGallery generic property =
 
 
 contactBox : Model -> GenericAttributes -> List (Html Msg)
-contactBox { showContactForm, email } { title } =
-    [ --  div [ class "view-form", onClick ToggleContactForm ] [ text "Find out more" ]
-      form [ class "contact-form", onSubmit ContactSubmit ]
+contactBox { showContactForm, email, enquiryStatus } { title } =
+    let
+        enquirySent =
+            case enquiryStatus of
+                Success _ ->
+                    True
+
+                _ ->
+                    False
+    in
+    [ form [ class "contact-form", onSubmit <| SubmitEnquiry title ]
         [ div []
             [ h1 [ class "title" ] [ text "Message us about this property" ]
             ]
@@ -200,10 +223,31 @@ contactBox { showContactForm, email } { title } =
             ]
         , div []
             [ button
-                [ type_ "submit"
-                ]
+                ([ type_ "submit"
+                 ]
+                    |> addIf enquirySent (disabled True)
+                )
                 [ text "Submit" ]
             ]
+        , div [ class "info" ]
+            (case enquiryStatus of
+                Success _ ->
+                    [ div [ class "success" ]
+                        [ div [] [ i [ class "fas fa-check" ] [] ]
+                        , div [] [ text " Enquiry Received. We'll get back to you soon." ]
+                        ]
+                    ]
+
+                Failure err ->
+                    [ div [ class "error" ]
+                        [ div [] [ i [ class "fas fa-times" ] [] ]
+                        , div [] [ text " There was an error sending your request. Please try again later." ]
+                        ]
+                    ]
+
+                _ ->
+                    []
+            )
         ]
     ]
 
@@ -288,7 +332,7 @@ imageConfig =
         }
 
 
-addIf : Bool -> Html msg -> List (Html msg) -> List (Html msg)
+addIf : Bool -> a -> List a -> List a
 addIf pred item list =
     if pred then
         list ++ [ item ]

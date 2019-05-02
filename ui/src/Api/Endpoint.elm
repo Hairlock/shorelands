@@ -1,4 +1,4 @@
-module Api.Endpoint exposing (Endpoint, properties, property, request)
+module Api.Endpoint exposing (Endpoint, enquiry, properties, property, request)
 
 import Config exposing (Config)
 import Http
@@ -53,3 +53,8 @@ properties config params =
 property : Config -> List QueryParameter -> Endpoint
 property config params =
     url config [ "property" ] params
+
+
+enquiry : Config -> Endpoint
+enquiry config =
+    url config [ "enquiry" ] []
