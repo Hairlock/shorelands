@@ -45,13 +45,20 @@ viewHeader page =
                     [ img [ src "/logo/shorelands_logo.svg" ] [] ]
                 ]
             , ul [ class "nav__items" ]
-                (List.map (\{ link, title } -> navItemLi link title) navItems)
-            , div []
-                [ select []
-                    [ option [] [ text "USD" ]
-                    , option [] [ text "TTD" ]
-                    ]
-                ]
+                (List.map (\{ link, title } -> navItemLi link title) navItems
+                    ++ [ select []
+                            [ option [] [ text "USD" ]
+                            , option [] [ text "TTD" ]
+                            ]
+                       ]
+                )
+
+            -- , div []
+            --     [ select []
+            --         [ option [] [ text "USD" ]
+            --         , option [] [ text "TTD" ]
+            --         ]
+            --     ]
             ]
         ]
 
@@ -63,7 +70,7 @@ viewFooter =
             [ h2 [ class "footer-hero" ]
                 [ text "Looking for a property? Send us an"
                 , a [ class "hero__link", href "mailto: cdsealy@hotmail.com" ]
-                    [ text "email" ]
+                    [ text " email" ]
                 ]
             ]
         , div [ class "container" ]

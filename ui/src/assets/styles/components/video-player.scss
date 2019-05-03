@@ -29,15 +29,20 @@
         > h1 {
             font-size: $header-size;
             letter-spacing: 2.5px;
-            margin-top: 0;
-
-            @include min-width(768px) {
-                margin-top: -2em;
+            margin-top: -2em;
+            
+            @include max-width($size-tablet) {
+                font-size: 1.4rem;
+                margin-top: 2em;                
             }
         }
 
         > h2 {
             font-size: $sub-header-size;
+
+            @include max-width($size-tablet) {
+                font-size: 1rem;
+            }
         }        
     }
 }

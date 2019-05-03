@@ -11,6 +11,10 @@ body {
     color: $font-color;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: antialiased;
+
+    @include max-width(900px) {
+      font-size: 1rem;
+    }
 }
 
 .container {

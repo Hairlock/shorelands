@@ -18,16 +18,15 @@
 
         .hero__link {
             @include hero-link();
-            display: block;
             padding: 11px 0;
-            font-size: 3rem;
+            font-size: 1.2rem;
             font-weight: 300;
 
             @include min-width($size-tablet) {
                 display: inline-block;
                 padding: 0 0 0 11px;
                 font-size: $font-size-h2;
-            }     
+            }
         }    
     }   
   

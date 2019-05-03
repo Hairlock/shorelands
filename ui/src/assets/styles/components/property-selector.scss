@@ -7,6 +7,10 @@
 
     > h2 {
         font-size: 1.6rem;
+
+        @include max-width($size-tablet) {
+            font-size: 1.2rem;
+        }
     }
 
     > .property-pills {
@@ -14,11 +18,12 @@
         flex-direction: row;
         justify-content: space-between;
         margin-top: 3em;
-        width: 60%;
+        width: 40%;
         font-size: 2rem;
-
-        @include min-width(1024px) {
-            width: 40%;
+        
+        @include max-width($size-tablet) {
+            width: 60%;
+            margin-top: 1em;
         }
 
         > .pill {
@@ -38,6 +43,10 @@
             &:hover {
                 background: $green-color;
                 color: white;
+            }
+
+            @include max-width($size-tablet) {
+                padding: 10px;
             }
         }
     }
