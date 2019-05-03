@@ -14,8 +14,8 @@ script:
 deploy:
   provider: elasticbeanstalk
   region: us-east-2
-  app: shore
-  env: ShoreEnv
+  app: Shore
+  env: Shore-env
   bucket_name: elasticbeanstalk-us-east-2-521418590951
   bucket_path: shorelands
   on:
