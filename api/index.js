@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const jsonDB = require('node-json-db');
 const fs = require('fs');
+const mailer = require('./mailer');
 
 const db = new jsonDB("properties", true, false);
 const port = process.env.PORT || 5000;
@@ -69,12 +70,8 @@ app.post('/api/enquiry', [
         email = req.body.email,
         message = req.body.message;
 
-    console.log(title);
-    console.log(email);
-    console.log(message);
-
+    mailer.sendMail(title, email, message);
     res.send({ success: true });
-
 });
 
 app.listen(port, err => {
