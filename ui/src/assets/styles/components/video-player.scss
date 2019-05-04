@@ -9,8 +9,6 @@
         width: 100%;
         vertical-align: middle;
         height: auto;
-        // position: relative;
-        // z-index: 0;
     }
 
     > .overlay {        
@@ -31,16 +29,16 @@
             letter-spacing: 2.5px;
             margin-top: -2em;
             
-            @include max-width($size-tablet) {
+            @include max-width($size-desktop) {
                 font-size: 1.4rem;
-                margin-top: 2em;                
+                margin-top: 0;              
             }
         }
 
         > h2 {
             font-size: $sub-header-size;
 
-            @include max-width($size-tablet) {
+            @include max-width($size-desktop) {
                 font-size: 1rem;
             }
         }        

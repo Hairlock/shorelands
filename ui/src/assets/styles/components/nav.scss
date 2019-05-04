@@ -5,6 +5,10 @@ nav {
     z-index: 10;
     background-color: $blue-color;
 
+    @include max-width($size-desktop) {
+        margin-bottom: 1em;
+    }
+
     .nav__brand {
         flex: 1 1 0;
         align-self: flex-start;
@@ -44,6 +48,10 @@ nav {
         @include max-width($size-tablet * 1.2) {
             padding: 0 20px;
             width: 100%;
+        }
+
+        @include max-width($size-mobile) {
+            font-size: 1rem;
         }
         
 

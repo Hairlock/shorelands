@@ -7,22 +7,27 @@
     padding: 1em 0 2em 0;
     width: 100%;  
 
+    
     > .header {
         color: $dark-blue-color;
     }
-
+    
     > .divider {
         border: 1px solid rgba(189, 186, 177, 0.6);
         width: 30%;
         margin-bottom: 1em;
         opacity: 80%;
     }
-
+    
     > .card-content {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
         width: 80%;
+        
+        @include max-width($size-mobile) {
+            flex-direction: column;
+        }
 
         > div {
             width: 50%;
@@ -30,9 +35,12 @@
             flex-direction: column;
             justify-content: space-between;
 
+            @include max-width($size-mobile) {
+                width: 100%;
+            }
+            
             > .tag-line {
-                margin-left: 0.9em;
-                // margin-top: 2em;
+                margin: 0.8em 0 0 0.9em;
             }
 
             > .select-btn {
@@ -45,6 +53,12 @@
                 font-size: 1.8rem;
                 color: $dark-blue-color;
                 cursor: pointer;
+
+                @include max-width($size-mobile) {
+                    margin-top: 1em;
+                    padding: 0.5em;
+                    font-size: 1rem;
+                }
     
                 a {
                     padding: 0 15px 0 15px;

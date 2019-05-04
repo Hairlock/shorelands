@@ -8,5 +8,10 @@
         font-size: 1.3rem;
         color: $grey-color;
         margin-left: 2.5em;
+
+        @include max-width($size-mobile) {
+            font-size: 0.8rem;
+            margin-left: 2em;
+        }
     }
 }

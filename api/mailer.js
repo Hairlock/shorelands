@@ -1,15 +1,13 @@
 const nodemailer = require('nodemailer'),
     { google } = require('googleapis'),
-    { clientId, clientSecret, refreshToken } = require('./config');
-OAuth2 = google.auth.OAuth2;
-
+    { clientId, clientSecret, refreshToken } = require('./config'),
+    OAuth2 = google.auth.OAuth2;
 
 const oauth2Client = new OAuth2(
     clientId,
     clientSecret,
     "https://developers.google.com/oauthplayground"
 );
-
 
 oauth2Client.setCredentials({
     refresh_token: refreshToken
@@ -18,8 +16,6 @@ oauth2Client.setCredentials({
 module.exports = {
     sendMail
 }
-
-
 
 function sendMail(title, email, message) {
     oauth2Client.getRequestHeaders()

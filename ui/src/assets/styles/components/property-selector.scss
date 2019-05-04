@@ -5,6 +5,10 @@
     justify-content: center;
     margin-top: 5em;
 
+    @include max-width($size-mobile) {
+        margin-top: 0.5em;
+    }
+
     > h2 {
         font-size: 1.6rem;
 
@@ -21,9 +25,14 @@
         width: 40%;
         font-size: 2rem;
         
-        @include max-width($size-tablet) {
+        @include max-width($size-desktop) {
             width: 60%;
             margin-top: 1em;
+        }
+
+        @include max-width($size-mobile) {
+            width: 80%;
+            margin-top: 0.5em;
         }
 
         > .pill {
@@ -46,7 +55,7 @@
             }
 
             @include max-width($size-tablet) {
-                padding: 10px;
+                padding: 0px;
             }
         }
     }
@@ -58,6 +67,10 @@
 
         @include min-width(768px) {
             margin-top: 2em;
+        }
+
+        @include max-width($size-mobile) {
+            display: none;
         }
     }
 
