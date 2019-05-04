@@ -3,11 +3,13 @@ const { check, validationResult }
     = require('express-validator/check');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const jsonDB = require('node-json-db');
 const fs = require('fs');
 const mailer = require('./mailer');
+const { db } = require('./database');
+const { sitemap } = require('./sitemap');
+const path = require('path');
+const ROBOTS_FILE = path.join(__dirname, '/robots.txt');
 
-const db = new jsonDB("properties", true, false);
 const port = process.env.PORT || 5000;
 
 const app = express();
@@ -73,6 +75,22 @@ app.post('/api/enquiry', [
     mailer.sendMail(title, email, message);
     res.send({ success: true });
 });
+
+app.get('/robots.txt', (req, res) => {
+    res.sendFile(ROBOTS_FILE);
+})
+
+app.get('/sitemap.xml', (req, res) => {
+    sitemap.toXML((err, xml) => {
+        if (err) {
+            console.error(err);
+            return res.status(500);
+        }
+
+        res.header('Content-Type', 'application/xml');
+        res.send(xml)
+    });
+})
 
 app.listen(port, err => {
     if (err)
