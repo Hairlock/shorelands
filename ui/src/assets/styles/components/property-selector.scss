@@ -11,6 +11,7 @@
 
     > h2 {
         font-size: 1.6rem;
+        color: #ea945b;
 
         @include max-width($size-tablet) {
             font-size: 1.2rem;
@@ -50,7 +51,7 @@
             }
 
             &:hover {
-                background: $green-color;
+                background-color: rgba(234, 148, 91, 0.81);
                 color: white;
             }
 

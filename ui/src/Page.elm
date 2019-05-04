@@ -18,7 +18,7 @@ type Page
 view : Page -> { title : String, content : Html msg } -> Document msg
 view page { title, content } =
     { title = title
-    , body = viewHeader page :: content :: [ viewFooter ]
+    , body = [ div [ class "main" ] (viewHeader page :: content :: [ viewFooter ]) ]
     }
 
 
@@ -42,7 +42,7 @@ viewHeader page =
             [ div
                 [ class "nav__brand" ]
                 [ a [ href "/" ]
-                    [ img [ src "/logo/shorelands_logo.svg" ] [] ]
+                    [ img [ src "/logo/shorelands.png" ] [] ]
                 ]
             , ul [ class "nav__items" ]
                 (List.map (\{ link, title } -> navItemLi link title) navItems)
