@@ -29,6 +29,7 @@ type alias GenericAttributes =
     , category : Category
     , tagline : String
     , size : Int
+    , price : String
     , images : List String
     , mapurl : String
     }
@@ -40,6 +41,7 @@ type alias HomeAttributes =
     , category : Category
     , tagline : String
     , size : Int
+    , price : String
     , images : List String
     , mapurl : String
     , bedrooms : Int
@@ -54,6 +56,7 @@ type alias LandAttributes =
     , category : Category
     , tagline : String
     , size : Int
+    , price : String
     , images : List String
     , mapurl : String
     , drainage : Bool
@@ -77,6 +80,7 @@ decodeLand =
         |> required "category" categoryDecoder
         |> required "tagline" Decode.string
         |> required "size" Decode.int
+        |> required "price" Decode.string
         |> required "images" (Decode.list Decode.string)
         |> required "mapurl" Decode.string
         |> required "drainage" Decode.bool
@@ -92,6 +96,7 @@ decodeHome =
         |> required "category" categoryDecoder
         |> required "tagline" Decode.string
         |> required "size" Decode.int
+        |> required "price" Decode.string
         |> required "images" (Decode.list Decode.string)
         |> required "mapurl" Decode.string
         |> required "bedrooms" Decode.int
@@ -107,8 +112,8 @@ decodeHome =
 genericAttrs : Property -> GenericAttributes
 genericAttrs property =
     let
-        extract { title, slug, category, tagline, size, images, mapurl } =
-            GenericAttributes title slug category tagline size images mapurl
+        extract { title, slug, category, tagline, size, price, images, mapurl } =
+            GenericAttributes title slug category tagline size price images mapurl
     in
     case property of
         Land attrs ->

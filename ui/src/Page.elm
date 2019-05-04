@@ -26,7 +26,7 @@ viewHeader : Page -> Html msg
 viewHeader page =
     let
         navItems =
-            [ { link = Route.href (Route.Properties Homes), title = "Homes" }
+            [ { link = Route.href (Route.Properties Homes), title = "Houses" }
             , { link = Route.href (Route.Properties Land), title = "Land" }
             , { link = Route.href (Route.Properties All), title = "All Properties" }
             , { link = Route.href Route.Home, title = "Contact Us" }
@@ -45,20 +45,7 @@ viewHeader page =
                     [ img [ src "/logo/shorelands_logo.svg" ] [] ]
                 ]
             , ul [ class "nav__items" ]
-                (List.map (\{ link, title } -> navItemLi link title) navItems
-                    ++ [ select []
-                            [ option [] [ text "USD" ]
-                            , option [] [ text "TTD" ]
-                            ]
-                       ]
-                )
-
-            -- , div []
-            --     [ select []
-            --         [ option [] [ text "USD" ]
-            --         , option [] [ text "TTD" ]
-            --         ]
-            --     ]
+                (List.map (\{ link, title } -> navItemLi link title) navItems)
             ]
         ]
 

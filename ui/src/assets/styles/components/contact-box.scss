@@ -11,36 +11,49 @@
         color: $dark-blue-color;
         cursor: pointer;
 
+        
         a {
             padding: 0 15px 0 15px;
         }
-
+        
         &:hover {
             background: $green-color;
             color: white;
         }
     }
-
+    
     > .contact-form {
         display: flex;
         flex-direction: column;
         align-items: center;
-
-        .title {
-            font-size: 1.8rem;
-        }
         
-
+        
+        
         > div {
-          position:relative;
-          max-width: 100%;
-          width: 100%;
-          display:flex;
-          margin: 20px;
+            position:relative;
+            max-width: 100%;
+            width: 100%;
+            display:flex;
+            margin: 20px;
+            
+            @include min-width($size-desktop) {
+                max-width: 60%;
+            }
 
-          @include min-width($size-desktop) {
-              max-width: 60%;
-          }
+            @include max-width($size-mobile) {
+                text-align: center;
+            }
+            
+            .title {
+                font-size: 1.8rem;
+                
+                @include max-width($size-mobile) {
+                    font-size: 1.4rem;   
+    
+                }
+            }
+
+
         }
 
         input{
@@ -61,6 +74,13 @@
             appearance: none;
             box-sizing: border-box;
             position: relative;
+
+            @include max-width($size-mobile) {
+                font-size: 1rem;
+                height: 40px;
+                letter-spacing: 2px;
+                padding: 30px 20px;
+            }
 
             &:focus::-webkit-input-placeholder {
                 color: transparent;
@@ -99,6 +119,11 @@
             color: white;
             justify-content: center;
             cursor: pointer;
+
+            @include max-width($size-mobile) {
+                padding-bottom: 45px;
+
+            }
             
             &:hover {
                 text-decoration: none;

@@ -122,7 +122,7 @@ amenitiesList property =
                 )
 
         Home { size, pool, bedrooms, bathrooms } ->
-            ul [ class "fa-ul amenities-list" ]
+            ul [ class "fa-ul amenities-list -properties" ]
                 ([ li [ class "amenities-item" ]
                     [ span [ class "fa-li" ]
                         [ i [ class "fas fa-ruler-combined" ] [] ]
