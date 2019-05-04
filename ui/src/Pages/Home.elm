@@ -68,7 +68,7 @@ propertySelector =
         [ h2 [] [ text "What are you looking for?" ]
         , div [ class "property-pills" ]
             [ div [ class "pill" ] [ a [ Route.href (Route.Properties Land) ] [ text "Land" ] ]
-            , div [ class "pill" ] [ a [ Route.href (Route.Properties Homes) ] [ text "Homes" ] ]
+            , div [ class "pill" ] [ a [ Route.href (Route.Properties Homes) ] [ text "House" ] ]
             ]
         , div [ class "sub-text" ]
             [ p [] [ text "pick a category above to view a selection of our properties" ] ]

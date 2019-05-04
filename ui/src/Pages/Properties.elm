@@ -98,7 +98,7 @@ amenitiesList : Property -> Html Msg
 amenitiesList property =
     case property of
         Land { size, drainage, planning } ->
-            ul [ class "fa-ul amenities-list" ]
+            ul [ class "fa-ul amenities-list -properties" ]
                 ([ li [ class "amenities-item" ]
                     [ span [ class "fa-li" ]
                         [ i [ class "fas fa-ruler-combined" ] [] ]
