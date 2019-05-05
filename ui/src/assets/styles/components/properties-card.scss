@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 1em 0 1em 0;
+    margin: 0 0 1em 0;
     background-color: white;
     padding: 1em 0 2em 0;
     width: 100%;  
@@ -47,11 +47,9 @@
                 margin: 2px;
                 padding: 15px;
                 border-radius: 30%;
-                // width: 50%;
                 margin: 0 auto;
-                border: 1px solid grey;
+                border: 1px solid $light-green-color;
                 font-size: 1.8rem;
-                color: $dark-blue-color;
                 cursor: pointer;
 
                 @include max-width($size-mobile) {
@@ -65,7 +63,7 @@
                 }
     
                 &:hover {
-                    background: $green-color;
+                    background: $light-green-color;
                     color: white;
                 }
             }

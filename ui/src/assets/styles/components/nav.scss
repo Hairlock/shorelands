@@ -55,6 +55,8 @@ nav {
         @include max-width($size-mobile) {
             font-size: 1rem;
         }
+
+
         
 
         > ul {
@@ -79,9 +81,7 @@ nav {
                 opacity: 1;
                 display: block;
             }
-        }
-
-        
+        }        
 
         &:hover {
             text-shadow: 2px 0 $orange-color;
@@ -94,6 +94,19 @@ nav {
                 visibility: visible;
                 opacity: 1;
                 display: block;
+            }
+        }
+    }
+
+    &.-home {
+        background-color: white;
+
+        .nav__item {
+            color: $green-color;
+            
+            &:hover {
+                color: $orange-color;
+                text-shadow: 1px 0.8px $dark-blue-color;
             }
         }
     }

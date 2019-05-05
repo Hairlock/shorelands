@@ -37,7 +37,7 @@ viewHeader page =
                 [ a [ link ] [ text title ]
                 ]
     in
-    nav [ class "nav" ]
+    nav [ class <| "nav" ++ pageToString page  ]
         [ div [ class "container" ]
             [ div
                 [ class "nav__brand" ]
@@ -77,3 +77,19 @@ viewFooter =
                 ]
             ]
         ]
+
+
+pageToString : Page -> String
+pageToString page =
+    case page of 
+        Home ->
+            " -home"
+
+        Properties ->
+            " -properties"
+
+        Property ->
+            " -property"
+
+        Other ->
+            " -other"
