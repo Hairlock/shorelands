@@ -28,9 +28,9 @@
             letter-spacing: 2.5px;
             margin-top: -2em;
             
-            @include max-width($size-desktop) {
-                font-size: 1.4rem;
-                margin-top: 0;              
+            @include max-width($size-mobile) {
+                font-size: 1.5rem;
+                margin-top: -1.5em;              
             }
         }
 

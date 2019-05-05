@@ -171,6 +171,7 @@ propertyCard model imageGallery generic property =
         , div [ class "inline" ]
             [ button [ class "contact-btn", onClick ToggleContactForm ] [ text "Contact Us" ]
             , div [ class "price-box" ] [ text <| "Price: TTD " ++ price ]
+            , div [ class "map-link" ] [ a [ href "https://goo.gl/maps/f2Cvdp1iS11Vu4wL9" ] [ text "See on Map" ] ]
             ]
         , if model.showContactForm then
             div [ class "contact-box", id "contact-box" ] <| contactBox model generic

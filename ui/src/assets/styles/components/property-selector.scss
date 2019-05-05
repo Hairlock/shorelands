@@ -55,8 +55,9 @@
                 color: white;
             }
 
-            @include max-width($size-tablet) {
+            @include max-width($size-mobile) {
                 padding: 0px;
+                font-size: 1.3rem;
             }
         }
     }

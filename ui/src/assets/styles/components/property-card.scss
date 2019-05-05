@@ -48,7 +48,6 @@
 
         @include max-width($size-mobile) {
             flex-direction: column;
-            flex-flow: column-reverse;
             padding: 0;
         }
 
@@ -88,6 +87,27 @@
 
             @include max-width($size-mobile) {
                 align-self: flex-end;
+                padding: 0 1em 1em 1em;
+            }
+        }
+
+        > .map-link {
+            @include max-width($size-mobile) {
+                align-self: center;
+                margin: 1em 0 1em;
+            }
+
+            > a {
+                @include max-width($size-mobile) {
+                    padding: 1em;
+                    background-color: $light-green-color;
+                    border-radius: 50%;
+                    color: white;
+                }
+            }
+
+            @include min-width($size-mobile) {
+                display: none;
             }
         }
     }
