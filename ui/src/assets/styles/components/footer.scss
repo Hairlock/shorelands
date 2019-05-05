@@ -2,8 +2,10 @@
     padding: 6em 0 6em;
     background-color: white;
   
-    @include min-width($size-tablet) {
-      padding: 4em 0 4em
+   
+
+    @include max-width($size-mobile) {
+      padding: 4em 0 6em;
     }
   
     .footer-hero {

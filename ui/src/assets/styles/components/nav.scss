@@ -4,14 +4,18 @@ nav {
     align-items: center;
     z-index: 10;
 
-    @include max-width($size-desktop) {
-        margin-bottom: 1em;
+    @include max-width($size-mobile) {
+        margin-bottom: 2em;        
     }
 
     .nav__brand {
         flex: 1 1 0;
         align-self: flex-start;
         margin-top: -1.5em;
+
+        @include max-width($size-mobile) {
+            margin-top: 1em;
+        }
 
         a {
             display: inline-block;
@@ -35,6 +39,10 @@ nav {
         padding: 0;
         text-align: right;
         vertical-align: top;
+
+        @include max-width($size-mobile) {
+            margin-bottom: 0.5em;
+        }
 
     }
 
