@@ -5,12 +5,17 @@
     margin-left: 0;
 
     > .amenities-item {
-        font-size: 1.3rem;
         color: $grey-color;
+        font-size: 1.3rem;
         margin-left: 2.5em;
     }
 
     &.-properties {
+        flex-direction: column;
+
+        > .amenities-item {
+            font-size: 1.1rem;
+        }
 
         @include max-width($size-mobile) {
             margin-top: 0.5em;

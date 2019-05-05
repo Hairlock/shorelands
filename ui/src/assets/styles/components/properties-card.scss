@@ -7,7 +7,6 @@
     padding: 1em 0 2em 0;
     width: 100%;  
 
-    
     > .header {
         color: $dark-blue-color;
     }
@@ -51,6 +50,10 @@
                 border: 1px solid $light-green-color;
                 font-size: 1.8rem;
                 cursor: pointer;
+
+                @include max-width($size-tablet) {
+                    font-size: 1.2rem;
+                }
 
                 @include max-width($size-mobile) {
                     margin-top: 1em;

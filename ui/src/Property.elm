@@ -57,6 +57,7 @@ type alias LandAttributes =
     , tagline : String
     , size : Int
     , price : String
+    , lots : Int
     , images : List String
     , mapurl : String
     , drainage : Bool
@@ -81,6 +82,7 @@ decodeLand =
         |> required "tagline" Decode.string
         |> required "size" Decode.int
         |> required "price" Decode.string
+        |> required "lots" Decode.int
         |> required "images" (Decode.list Decode.string)
         |> required "mapurl" Decode.string
         |> required "drainage" Decode.bool
