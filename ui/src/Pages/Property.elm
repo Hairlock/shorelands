@@ -199,8 +199,19 @@ contactBox { showContactForm, email, enquiryStatus } { title } =
                     False
     in
     [ form [ class "contact-form", onSubmit <| SubmitEnquiry title ]
-        [ div []
-            [ h1 [ class "title" ] [ text "Message us about this property" ]
+        [ div [ class "mobile-contact" ]
+            [ h1 [ class "title" ]
+                [ i [ class "fas fa-mobile-alt" ] []
+                , a [ href "tel:+18683683823" ] [ text "1-868-368-3823" ]
+                , text " or "
+                , a [ href "tel:+18686802978" ] [ text "1-868-680-2978" ]
+                ]
+            ]
+        , div []
+            [ h1 [ class "title" ]
+                [ i [ class "far fa-envelope" ] []
+                , text "Message us about this property"
+                ]
             ]
         , div []
             [ input [ type_ "text", value title, disabled True ] []

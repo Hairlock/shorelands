@@ -3,6 +3,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     margin-left: 0;
+    justify-content: center;
 
     > .amenities-item {
         color: $grey-color;
@@ -32,7 +33,7 @@
             width: 90%;
             
             > .amenities-item {
-                font-size: 0.8rem;
+                font-size: 0.9rem;
             }            
         }
     }

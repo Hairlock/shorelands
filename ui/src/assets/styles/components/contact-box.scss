@@ -27,6 +27,12 @@
         flex-direction: column;
         align-items: center;
         
+
+        .mobile-contact {
+            @include max-width($size-mobile) {
+                justify-content: center;
+            }
+        }
         
         
         > div {
@@ -41,15 +47,25 @@
             }
 
             @include max-width($size-mobile) {
-                text-align: center;
+                text-align: center;                
             }
             
             .title {
-                font-size: 1.8rem;
+                font-size: 1.2rem;
+
+                > i {
+                    margin-right: 0.3em;
+                }
+
+                > a {
+                    color: $light-green-color;
+                }
                 
                 @include max-width($size-mobile) {
-                    font-size: 1.4rem;   
-    
+                    font-size: 1rem;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
                 }
             }
 

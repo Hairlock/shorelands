@@ -27,12 +27,13 @@
         line-height: 1.2em;
 
         @include max-width($size-mobile) {
-            font-size: 1.1rem;
+            font-size: 1.4rem;
         }
     }
 
     > .breakdown {
         padding: 1em;
+        font-size: 1.2rem;
 
         @include min-width($size-desktop) {
             width: 80%;
@@ -84,9 +85,9 @@
         > .price-box {
             align-self: center;
             padding: 1em;
+            font-size: 1.4rem;
 
             @include max-width($size-mobile) {
-                align-self: flex-end;
                 padding: 0 1em 1em 1em;
             }
         }
@@ -94,7 +95,7 @@
         > .map-link {
             @include max-width($size-mobile) {
                 align-self: center;
-                margin: 1em 0 1em;
+                margin: 1em 0 1.5em;
             }
 
             > a {
