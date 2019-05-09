@@ -37,6 +37,10 @@
             @include max-width($size-mobile) {
                 width: 100%;
             }
+
+            > .property-picture {
+                max-width: 450px;
+            }
             
             > .tag-line {
                 margin: 0.8em 0 0 0.9em;

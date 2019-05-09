@@ -87,7 +87,7 @@ propertiesCard config property =
             [ div [] [ img [ class "property-picture", src <| config.apiUrl ++ "/images/" ++ slug ++ "/primary.jpg" ] [] ]
             , div []
                 [ div [] [ amenities property ]
-                , div [ class "tag-line" ] [ text tagline ]
+                , div [ class "tag-line" ] [ text <| tagline ++ " is the best property in the world. Buy it or forever hold your peace." ]
                 , a [ class "select-btn", Route.href (Route.Property slug) ] [ text "See More" ]
                 ]
             ]

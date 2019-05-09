@@ -3,4 +3,15 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    > .properties-card:nth-child(2) {
+
+        > .card-content {
+            flex-flow: row-reverse;
+
+            @include max-width($size-mobile) {
+                flex-flow: column;
+            }
+        }
+    }
 }

@@ -4,10 +4,6 @@ nav {
     align-items: center;
     z-index: 10;
 
-    @include max-width($size-mobile) {
-        margin-bottom: 2em;        
-    }
-
     .nav__brand {
         flex: 1 1 0;
         align-self: flex-start;
