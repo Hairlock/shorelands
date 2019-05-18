@@ -124,7 +124,6 @@ update msg model =
             )
 
 
-
 view : Model -> { title : String, content : Html Msg }
 view model =
     case model.property of

@@ -4,7 +4,7 @@
     align-items: center;
     flex-direction: column;
 
-    > .properties-card:nth-child(2) {
+    > .properties-card:nth-child(odd) {
 
         > .card-content {
             flex-flow: row-reverse;

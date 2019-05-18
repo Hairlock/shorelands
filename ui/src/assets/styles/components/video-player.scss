@@ -26,7 +26,7 @@
         > h1 {
             font-size: $header-size;
             letter-spacing: 2.5px;
-            margin-top: -2em;
+            margin-top: -1.5em;
             
             @include max-width($size-mobile) {
                 font-size: 1.5rem;
