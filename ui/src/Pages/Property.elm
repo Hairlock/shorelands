@@ -8,6 +8,7 @@ import Html exposing (Html, a, button, div, form, h1, hr, i, iframe, img, input,
 import Html.Attributes exposing (attribute, class, disabled, height, href, id, placeholder, required, src, style, type_, value, width)
 import Html.Events exposing (..)
 import Http
+import Ports exposing (scrollTo)
 import Property exposing (GenericAttributes, MapUrl, Property(..), Slug, fetch, genericAttrs)
 import Property.Category as Category exposing (Category)
 import RemoteData exposing (RemoteData(..), WebData)
@@ -54,7 +55,7 @@ init config session slug =
 type Msg
     = PropertyLoaded (WebData Property)
     | ImageGalleryMsg Gallery.Msg
-    | ToggleContactForm
+    | GoToContactForm
     | EmailInput String
     | MessageInput String
     | SubmitEnquiry String
@@ -102,8 +103,8 @@ update msg model =
         EnquiryResult data ->
             ( { model | enquiryStatus = data }, Cmd.none )
 
-        ToggleContactForm ->
-            ( { model | showContactForm = not model.showContactForm }, Cmd.none )
+        GoToContactForm ->
+            ( model, scrollTo "contact-box" )
 
         EmailInput email ->
             ( { model | email = email }, Cmd.none )
@@ -121,6 +122,7 @@ update msg model =
                 |> Http.toTask
                 |> Task.attempt (RemoteData.fromResult >> EnquiryResult)
             )
+
 
 
 view : Model -> { title : String, content : Html Msg }
@@ -169,21 +171,12 @@ propertyCard model imageGallery generic property =
         , div [ class "tagline" ] [ text tagline ]
         , div [ class "breakdown" ] [ text "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sagittis mollis tincidunt. Duis vel interdum turpis, ac tempus justo. Mauris gravida suscipit sem, sit amet feugiat leo mollis eu. Aenean ac tempor mi. Praesent sed venenatis mi. Sed in cursus arcu, in molestie lorem. Cras in massa laoreet, iaculis magna vitae, accumsan ligula. Mauris eget scelerisque metus, tempus bibendum nisl. Curabitur scelerisque varius ex in consectetur. Phasellus bibendum bibendum eros, sit amet finibus dolor porta non. Proin pretium, dolor ac tincidunt euismod, lectus purus tincidunt leo, at condimentum risus purus scelerisque purus. Vivamus porttitor velit nec tortor vulputate, vitae pellentesque justo euismod." ]
         , div [ class "inline" ]
-            [ button [ class "contact-btn", onClick ToggleContactForm ] [ text "Contact Us" ]
+            [ button [ class "contact-btn", onClick GoToContactForm ] [ text "Contact Us" ]
             , div [ class "price-box" ] [ text <| "Price: TTD " ++ price ]
             , div [ class "map-link" ] [ a [ href "https://goo.gl/maps/f2Cvdp1iS11Vu4wL9" ] [ text "See on Map" ] ]
             ]
-        , if model.showContactForm then
-            div [ class "contact-box", id "contact-box" ] <| contactBox model generic
-
-          else
-            div [] []
         , div [ class "static-map" ] [ staticMap mapurl ]
-        , if not <| model.showContactForm then
-            div [ class "contact-box", id "contact-box" ] <| contactBox model generic
-
-          else
-            div [] []
+        , div [ class "contact-box", id "contact-box" ] <| contactBox model generic
         ]
 
 
