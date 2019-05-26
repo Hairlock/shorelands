@@ -28,6 +28,7 @@ type alias GenericAttributes =
     , slug : String
     , category : Category
     , tagline : String
+    , verbage : String
     , size : Int
     , price : String
     , images : List String
@@ -40,6 +41,7 @@ type alias HomeAttributes =
     , slug : String
     , category : Category
     , tagline : String
+    , verbage : String
     , size : Int
     , price : String
     , images : List String
@@ -55,7 +57,10 @@ type alias LandAttributes =
     , slug : String
     , category : Category
     , tagline : String
+    , verbage : String
     , size : Int
+    , beachfront : Bool
+    , electricity : Bool
     , price : String
     , lots : Int
     , images : List String
@@ -80,7 +85,10 @@ decodeLand =
         |> required "slug" Decode.string
         |> required "category" categoryDecoder
         |> required "tagline" Decode.string
+        |> required "verbage" Decode.string
         |> required "size" Decode.int
+        |> required "beachfront" Decode.bool
+        |> required "electricity" Decode.bool
         |> required "price" Decode.string
         |> required "lots" Decode.int
         |> required "images" (Decode.list Decode.string)
@@ -97,6 +105,7 @@ decodeHome =
         |> required "slug" Decode.string
         |> required "category" categoryDecoder
         |> required "tagline" Decode.string
+        |> required "verbage" Decode.string
         |> required "size" Decode.int
         |> required "price" Decode.string
         |> required "images" (Decode.list Decode.string)
@@ -114,8 +123,8 @@ decodeHome =
 genericAttrs : Property -> GenericAttributes
 genericAttrs property =
     let
-        extract { title, slug, category, tagline, size, price, images, mapurl } =
-            GenericAttributes title slug category tagline size price images mapurl
+        extract { title, slug, category, tagline, verbage, size, price, images, mapurl } =
+            GenericAttributes title slug category tagline verbage size price images mapurl
     in
     case property of
         Land attrs ->

@@ -87,7 +87,7 @@ propertiesCard config property =
             [ div [] [ img [ class "property-picture", src <| config.apiUrl ++ "/images/" ++ slug ++ "/primary.jpg" ] [] ]
             , div []
                 [ div [] [ amenities property ]
-                , div [ class "tag-line" ] [ text <| tagline ++ " is the best property in the world. Buy it or forever hold your peace." ]
+                , div [ class "tag-line" ] [ text tagline ]
                 , a [ class "select-btn", Route.href (Route.Property slug) ] [ text "See More" ]
                 ]
             ]
@@ -97,7 +97,7 @@ propertiesCard config property =
 amenitiesList : Property -> Html Msg
 amenitiesList property =
     case property of
-        Land { size, drainage, planning } ->
+        Land { size, drainage, planning, beachfront, electricity, price } ->
             ul [ class "fa-ul amenities-list -properties" ]
                 ([ li [ class "amenities-item" ]
                     [ span [ class "fa-li" ]
@@ -112,11 +112,25 @@ amenitiesList property =
                             , text "Drainage"
                             ]
                         )
-                    |> addIf planning
+                    |> addIf beachfront
                         (li [ class "amenities-item" ]
                             [ span [ class "fa-li" ]
-                                [ i [ class "fas fa-tint" ] [] ]
-                            , text "Town and Country"
+                                [ i [ class "fas fa-umbrella-beach" ] [] ]
+                            , text "Beachfront"
+                            ]
+                        )
+                    |> addIf electricity
+                        (li [ class "amenities-item" ]
+                            [ span [ class "fa-li" ]
+                                [ i [ class "fas fa-bolt" ] [] ]
+                            , text "Electricity"
+                            ]
+                        )
+                    |> addIf True
+                        (li [ class "amenities-item" ]
+                            [ span [ class "fa-li" ]
+                                [ i [ class "fas fa-dollar-sign" ] [] ]
+                            , text <| price ++ " TTD"
                             ]
                         )
                 )

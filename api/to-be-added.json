@@ -1,0 +1,80 @@
+[
+    {
+        "title": "Ghoul Street",
+        "slug": "ghoul-street",
+        "category": "land",
+        "tagline": "Ghoul Street",
+        "verbage": "",
+        "size": 8000,
+        "price": "1,000,000",
+        "lots": 1,
+        "mapurl": "",
+        "drainage": true,
+        "planning": true
+    },
+    {
+        "title": "ADB Land",
+        "slug": "adb-land",
+        "category": "land",
+        "tagline": "ADB Land",
+        "verbage": "",
+        "size": 8000,
+        "price": "3,000,000",
+        "lots": 1,
+        "mapurl": "",
+        "drainage": true,
+        "planning": true
+    },
+    {
+        "title": "Palm Springs",
+        "slug": "palm-springs",
+        "category": "land",
+        "tagline": "Palm springs",
+        "verbage": "",
+        "size": 8000,
+        "price": "500,000",
+        "lots": 4,
+        "mapurl": "",
+        "drainage": true,
+        "planning": true
+    },
+    {
+        "title": "Govic",
+        "slug": "govic",
+        "category": "land",
+        "tagline": "Govic",
+        "verbage": "",
+        "size": 8000,
+        "price": "1,000,000",
+        "lots": 1,
+        "mapurl": "",
+        "drainage": true,
+        "planning": true
+    },
+    {
+        "title": "Biggurat",
+        "slug": "biggurat",
+        "category": "land",
+        "tagline": "Biggurat",
+        "verbage": "",
+        "size": 8000,
+        "price": "145,000",
+        "lots": 7,
+        "mapurl": "",
+        "drainage": true,
+        "planning": true
+    },
+    {
+        "title": "Oceanwinds",
+        "slug": "oceanwinds",
+        "category": "land",
+        "tagline": "Oceanwinds",
+        "verbage": "",
+        "size": 8000,
+        "price": "2,000,000",
+        "lots": 1,
+        "mapurl": "",
+        "drainage": true,
+        "planning": true
+    }
+]

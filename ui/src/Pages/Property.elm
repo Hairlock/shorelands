@@ -154,7 +154,7 @@ view model =
 propertyCard : Model -> Maybe Gallery.State -> GenericAttributes -> Property -> Html Msg
 propertyCard model imageGallery generic property =
     let
-        { title, slug, category, size, price, tagline, images, mapurl } =
+        { title, slug, category, size, price, tagline, verbage, images, mapurl } =
             generic
     in
     div [ class "property-card container" ]
@@ -168,7 +168,7 @@ propertyCard model imageGallery generic property =
                 div [] []
         , amenitiesList property
         , div [ class "tagline" ] [ text tagline ]
-        , div [ class "breakdown" ] [ text "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sagittis mollis tincidunt. Duis vel interdum turpis, ac tempus justo. Mauris gravida suscipit sem, sit amet feugiat leo mollis eu. Aenean ac tempor mi. Praesent sed venenatis mi. Sed in cursus arcu, in molestie lorem. Cras in massa laoreet, iaculis magna vitae, accumsan ligula. Mauris eget scelerisque metus, tempus bibendum nisl. Curabitur scelerisque varius ex in consectetur. Phasellus bibendum bibendum eros, sit amet finibus dolor porta non. Proin pretium, dolor ac tincidunt euismod, lectus purus tincidunt leo, at condimentum risus purus scelerisque purus. Vivamus porttitor velit nec tortor vulputate, vitae pellentesque justo euismod." ]
+        , div [ class "breakdown" ] [ text verbage ]
         , div [ class "inline" ]
             [ button [ class "contact-btn", onClick GoToContactForm ] [ text "Contact Us" ]
             , div [ class "price-box" ] [ text <| "Price: TTD " ++ price ]
@@ -177,6 +177,14 @@ propertyCard model imageGallery generic property =
         , div [ class "static-map" ] [ staticMap mapurl ]
         , div [ class "contact-box", id "contact-box" ] <| contactBox model generic
         ]
+
+
+
+-- toParagraph : String -> List (Html Msg)
+-- toParagraph verbage =
+--     verbage 
+--         |> String.split "."
+--         |> List.
 
 
 contactBox : Model -> GenericAttributes -> List (Html Msg)
