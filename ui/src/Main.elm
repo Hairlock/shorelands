@@ -14,8 +14,9 @@ import Pages.Blank as Blank
 import Pages.Home as Home
 import Pages.Properties as PropertiesPage
 import Pages.Property as PropertyPage
+import Ports exposing (trackPage)
 import Property
-import Route exposing (Route)
+import Route exposing (Route, routeToString)
 import Session exposing (Session, freshSession)
 import Url exposing (Url)
 import Url.Parser as UrlParser exposing ((</>), Parser, top)
@@ -61,26 +62,49 @@ changeRouteTo maybeRoute model =
 
         Just Route.Home ->
             Home.init session
-                |> updateWith Home HomeMsg model
+                |> updateWith
+                    Home
+                    HomeMsg
+                    model
+                    (Just Route.Home)
 
         Just (Route.Properties category) ->
             PropertiesPage.init model.config session category
-                |> updateWith Properties PropertiesMsg model
+                |> updateWith
+                    Properties
+                    PropertiesMsg
+                    model
+                    (Just <| Route.Properties category)
 
         Just (Route.Property slug) ->
             PropertyPage.init model.config session slug
-                |> updateWith Property PropertyMsg model
+                |> updateWith
+                    Property
+                    PropertyMsg
+                    model
+                    (Just <| Route.Property slug)
 
 
 updateWith :
     (subModel -> Page)
     -> (subMsg -> Msg)
     -> Model
+    -> Maybe Route
     -> ( subModel, Cmd subMsg )
     -> ( Model, Cmd Msg )
-updateWith toModel toMsg model ( subModel, subCmd ) =
+updateWith toModel toMsg model maybeRoute ( subModel, subCmd ) =
+    let
+        trackPageCmd =
+            maybeRoute
+                |> Maybe.map routeToString
+                |> Maybe.map trackPage
+                |> Maybe.withDefault Cmd.none
+    in
     ( Model (toModel subModel) model.config
-    , Cmd.map toMsg subCmd
+    , Cmd.batch
+        [ Cmd.map toMsg subCmd
+        , trackPageCmd
+        ]
     )
 
 
@@ -117,15 +141,15 @@ update msg model =
 
         ( HomeMsg subMsg, Home home ) ->
             Home.update subMsg home
-                |> updateWith Home HomeMsg model
+                |> updateWith Home HomeMsg model Nothing
 
         ( PropertiesMsg subMsg, Properties properties ) ->
             PropertiesPage.update subMsg properties
-                |> updateWith Properties PropertiesMsg model
+                |> updateWith Properties PropertiesMsg model Nothing
 
         ( PropertyMsg subMsg, Property property ) ->
             PropertyPage.update subMsg property
-                |> updateWith Property PropertyMsg model
+                |> updateWith Property PropertyMsg model Nothing
 
         ( _, _ ) ->
             ( model, Cmd.none )

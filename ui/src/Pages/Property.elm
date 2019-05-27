@@ -182,7 +182,7 @@ propertyCard model imageGallery generic property =
 
 -- toParagraph : String -> List (Html Msg)
 -- toParagraph verbage =
---     verbage 
+--     verbage
 --         |> String.split "."
 --         |> List.
 

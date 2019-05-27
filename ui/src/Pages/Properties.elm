@@ -84,7 +84,7 @@ propertiesCard config property =
         [ h1 [ class "header" ] [ text title ]
         , hr [ class "divider" ] []
         , div [ class "card-content" ]
-            [ div [] [ img [ class "property-picture", src <| config.apiUrl ++ "/images/" ++ slug ++ "/primary.jpg" ] [] ]
+            [ div [] [ img [ class "property-picture", src <| config.apiUrl ++ "/images/" ++ slug ++ "/1-primary.jpg" ] [] ]
             , div []
                 [ div [] [ amenities property ]
                 , div [ class "tag-line" ] [ text tagline ]
